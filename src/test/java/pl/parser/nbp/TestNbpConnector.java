@@ -22,26 +22,25 @@ public class TestNbpConnector {
     }
 
     @Test
-    public void shouldCalculateFileListReturnCorrectListOfFilenamesForPreviousYear() {
+    public void shouldCraeteCatalogListReturnCorrectListOfFilenamesForPreviousYear() {
         //given
         String startDate = previousYear + "-01-01";
         String endDate = previousYear + "-01-10";
 
         //when
-        List<String> fileLists = nbpConnector.calculateFileList(startDate, endDate);
+        List<String> fileLists = nbpConnector.craeteCatalogList(startDate, endDate);
         //then
         Assert.assertEquals(fileLists, Arrays.asList("dir" + previousYear + ".txt"));
     }
 
     @Test
-    public void shouldCalculateFileListReturnCorrectListOfFilenamesForCurrentYear() {
+    public void shouldCrateCatalogListReturnCorrectListOfFilenamesForCurrentYear() {
         //given
         String startDate = previousYear + "-01-01";
         String endDate = currentYear + "-01-01";
         //when
-        List<String> fileLists = nbpConnector.calculateFileList(startDate, endDate);
+        List<String> fileLists = nbpConnector.craeteCatalogList(startDate, endDate);
         //then
         Assert.assertEquals(fileLists, Arrays.asList("dir" + previousYear + ".txt", "dir.txt"));
     }
-
 }

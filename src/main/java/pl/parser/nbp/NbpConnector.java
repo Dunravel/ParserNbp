@@ -6,7 +6,7 @@ import java.util.List;
 
 class NbpConnector {
 
-    List<String> calculateFileList(String startDate, String endDate) {
+    List<String> craeteCatalogList(String startDate, String endDate) {
         int startYear = Integer.parseInt(startDate.substring(0,4));
         int endYear = Integer.parseInt(endDate.substring(0,4));
 
@@ -19,7 +19,8 @@ class NbpConnector {
                 fileList.add("dir.txt");
             }
         }
-
         return fileList;
     }
+
+
 }
