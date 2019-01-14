@@ -2,6 +2,7 @@ package pl.parser.nbp;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 class InputCheck {
 
@@ -31,8 +32,12 @@ class InputCheck {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         simpleDateFormat.setLenient(false);
         try{
-            simpleDateFormat.parse(startDate.trim());
-            simpleDateFormat.parse(endDate.trim());
+            Date dateStart = simpleDateFormat.parse(startDate.trim());
+            Date dateEnd = simpleDateFormat.parse(endDate.trim());
+
+            if(dateStart.after(dateEnd)){
+                throw new IncorrectDatePeriod();
+            }
         } catch (ParseException e) {
             throw new IncorrectDate();
         }
