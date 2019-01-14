@@ -10,7 +10,7 @@ public class TestInputCheck {
 
     private static final String CORRECT_CURRENCY = "EUR";
     private static final String INCORRECT_CURRENCY = "PLN";
-    private static final String CORRECT_DATE = "2018-01-01";
+    private static final String FIRST_CORRECT_DATE = "2018-01-01";
     private static final String INCORRECT_DATE = "2018-02-30";
     private InputCheck inputCheck;
 
@@ -61,7 +61,7 @@ public class TestInputCheck {
     public void shouldIsDateReturnTrueWhenParameterIsDate(){
         //given
         //when
-        boolean isDate = inputCheck.areDatesCorrect(CORRECT_DATE, CORRECT_DATE);
+        boolean isDate = inputCheck.areDatesCorrect(FIRST_CORRECT_DATE, FIRST_CORRECT_DATE);
         //then
         Assert.assertTrue(isDate);
     }
@@ -70,14 +70,23 @@ public class TestInputCheck {
     public void shouldAreDatesCorrectReturnErrorWhenFirstParameterIsNotDate(){
         //given
         //when
-        inputCheck.areDatesCorrect(INCORRECT_DATE, CORRECT_DATE);
+        inputCheck.areDatesCorrect(INCORRECT_DATE, FIRST_CORRECT_DATE);
     }
 
     @Test(expected = IncorrectDate.class)
     public void shouldAreDatesCorrectReturnErrorWhenSecondParameterIsNotDate(){
         //given
         //when
-        inputCheck.areDatesCorrect(CORRECT_DATE, INCORRECT_DATE);
+        inputCheck.areDatesCorrect(FIRST_CORRECT_DATE, INCORRECT_DATE);
+    }
+
+    @Test(expected = IncorrectDatePeriod.class)
+    public void shouldAreDatesCorrectReturnErrorWhenDatePeriodIsNotCorrect(){
+        //given
+        String secondCorrectDate = "2018-02-02";
+        //when
+        inputCheck.areDatesCorrect(secondCorrectDate,FIRST_CORRECT_DATE);
+
     }
 
 }
