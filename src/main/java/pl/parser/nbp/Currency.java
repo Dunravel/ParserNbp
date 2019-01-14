@@ -5,4 +5,13 @@ public enum Currency {
     EUR,
     CHF,
     GBP;
+
+    public static boolean exists(String currency) {
+        try {
+            valueOf(currency);
+        } catch (IllegalArgumentException ex){
+            return false;
+        }
+        return true;
+    }
 }

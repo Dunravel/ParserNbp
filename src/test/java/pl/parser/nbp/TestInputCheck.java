@@ -47,7 +47,7 @@ public class TestInputCheck {
     @Test(expected = UnrecognizedCurrency.class)
     public void shouldReturnErrorWhenFirstParameterIsNotSupportedCurrency(){
         //given
-        String currency = "1";
+        String currency = "PLN";
         //when
         inputCheck.verifyCurrency(currency);
         //then
