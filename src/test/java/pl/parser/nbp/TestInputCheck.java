@@ -13,6 +13,7 @@ public class TestInputCheck {
     private static final String FIRST_CORRECT_DATE = "2018-01-01";
     private static final String INCORRECT_DATE = "2018-02-30";
     private InputCheck inputCheck;
+    private static final String SECOND_CORRECT_DATE = "2018-02-02";
 
     @Before
     public void setUp() {
@@ -83,9 +84,8 @@ public class TestInputCheck {
     @Test(expected = IncorrectDatePeriod.class)
     public void shouldAreDatesCorrectReturnErrorWhenDatePeriodIsNotCorrect(){
         //given
-        String secondCorrectDate = "2018-02-02";
         //when
-        inputCheck.areDatesCorrect(secondCorrectDate,FIRST_CORRECT_DATE);
+        inputCheck.areDatesCorrect(SECOND_CORRECT_DATE,FIRST_CORRECT_DATE);
     }
 
 }
