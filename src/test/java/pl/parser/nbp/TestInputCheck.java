@@ -17,7 +17,7 @@ public class TestInputCheck {
     @Test
     public void shouldReturnTrueWhenAmountOfParametersIsThree(){
         //given
-        String args[] = {"1","2"};
+        String args[] = {"1","2","3"};
         InputCheck inputCheck = new InputCheck();
         //when
         boolean isThree = inputCheck.verifyAmount(args);
