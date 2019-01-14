@@ -1,5 +1,8 @@
 package pl.parser.nbp;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 class InputCheck {
 
     public static final int CORRECT_AMOUNT_OF_PARAMETERS = 3;
@@ -25,7 +28,13 @@ class InputCheck {
     }
 
 
-    public boolean isDate(String date) {
-        return false;
+    boolean isDate(String date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try{
+            simpleDateFormat.parse(date.trim());
+        } catch (ParseException e) {
+            return false;
+        }
+        return true;
     }
 }
