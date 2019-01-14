@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class NbpConnector {
+
     List<String> calculateFileList(String startDate, String endDate) {
         int startYear = Integer.parseInt(startDate.substring(0,4));
         int endYear = Integer.parseInt(endDate.substring(0,4));
