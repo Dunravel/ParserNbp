@@ -10,7 +10,7 @@ class InputCheck {
     boolean verifyAmount(String[] args) {
         if(args.length != 3)
             throw new IncorrectAmountOfParameters();
-        return false;
+        return true;
     }
 
 }
