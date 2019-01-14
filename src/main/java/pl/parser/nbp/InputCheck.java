@@ -11,4 +11,7 @@ class InputCheck {
         if(args.length != 3)
             throw new IncorrectAmountOfParameters();
     }
+
+    public void verifyCurrency(String currency) {
+    }
 }
