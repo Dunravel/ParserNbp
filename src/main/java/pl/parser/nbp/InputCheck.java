@@ -7,6 +7,7 @@ import java.util.Date;
 class InputCheck {
 
     private static final int CORRECT_AMOUNT_OF_PARAMETERS = 3;
+    private static final String MINIMUM_DATE = "2002-01-01";
 
 
     void verify(String[] args) {
@@ -35,7 +36,7 @@ class InputCheck {
             Date dateStart = simpleDateFormat.parse(startDate.trim());
             Date dateEnd = simpleDateFormat.parse(endDate.trim());
 
-            if(dateStart.before(simpleDateFormat.parse("2002-01-01"))){
+            if(dateStart.before(simpleDateFormat.parse(MINIMUM_DATE))){
                 throw new IncorrectDatePeriod();
             }
 
