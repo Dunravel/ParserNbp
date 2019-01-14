@@ -36,4 +36,15 @@ public class TestInputCheck {
         Assert.assertTrue(isThree);
     }
 
+    @Test(expected = UnrecognizedCurrency.class)
+    public void shouldReturnErrorWhenFirstParameterIsNotSupportedCurrency(){
+        //given
+        String args[] = {"PLN","2","3"};
+        InputCheck inputCheck = new InputCheck();
+        //when
+        inputCheck.verifyCurrency(args[0]);
+        //then
+    }
+
+
 }

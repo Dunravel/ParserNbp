@@ -16,4 +16,7 @@ class InputCheck {
     public boolean verifyCurrency(String currency) {
         return false;
     }
+
+    public void verifyCurrency(String currency) {
+    }
 }
