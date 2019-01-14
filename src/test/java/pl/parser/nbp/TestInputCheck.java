@@ -7,8 +7,11 @@ public class TestInputCheck {
     public void shouldReturnErrorWhenIncorrectAmountOfParameters(){
         //given
         String args[] = {"1","2"};
+        InputCheck inputCheck = new InputCheck();
         //when
-        new InputCheck(args);
+        inputCheck.verifyAmount(args);
         //then
     }
+
+
 }

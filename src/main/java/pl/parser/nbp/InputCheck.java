@@ -3,11 +3,11 @@ package pl.parser.nbp;
 class InputCheck {
 
 
-    InputCheck(String[] args) {
-        verifyAmount(args);
+    InputCheck() {
+
     }
 
-    private void verifyAmount(String[] args) {
+    void verifyAmount(String[] args) {
         if(args.length != 3)
             throw new IncorrectAmountOfParameters();
     }
