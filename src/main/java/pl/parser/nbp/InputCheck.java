@@ -11,9 +11,8 @@ class InputCheck {
     void verify(String[] args) {
         verifyAmount(args);
         verifyCurrency(args[0]);
+        areDatesCorrect(args[1],args[2]);
     }
-
-
 
     boolean verifyAmount(String[] args) {
         if(args.length != CORRECT_AMOUNT_OF_PARAMETERS)
