@@ -8,6 +8,7 @@ class InputCheck {
 
     private static final int CORRECT_AMOUNT_OF_PARAMETERS = 3;
 
+
     void verify(String[] args) {
         verifyAmount(args);
         verifyCurrency(args[0]);
@@ -33,6 +34,10 @@ class InputCheck {
         try{
             Date dateStart = simpleDateFormat.parse(startDate.trim());
             Date dateEnd = simpleDateFormat.parse(endDate.trim());
+
+            if(dateStart.before(simpleDateFormat.parse("2002-01-01"))){
+                throw new IncorrectDatePeriod();
+            }
 
             if(dateStart.after(dateEnd)){
                 throw new IncorrectDatePeriod();
