@@ -13,4 +13,7 @@ class InputCheck {
         return true;
     }
 
+    public boolean verifyCurrency(String currency) {
+        return false;
+    }
 }
