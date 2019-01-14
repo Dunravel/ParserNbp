@@ -4,7 +4,8 @@ public class MainClass {
     public static void main(String[] args) {
 
         InputCheck inputCheck = new InputCheck();
-        inputCheck.verifyAmount(args);
+        inputCheck.verify(args);
+
 
     }
 }

@@ -2,13 +2,18 @@ package pl.parser.nbp;
 
 class InputCheck {
 
+    public static final int CORRECT_AMOUNT_OF_PARAMETERS = 3;
 
-    InputCheck() {
+    void verify(String[] args) {
+        verifyAmount(args);
+        verifyCurrency(args[0]);
 
     }
 
+
+
     boolean verifyAmount(String[] args) {
-        if(args.length != 3)
+        if(args.length != CORRECT_AMOUNT_OF_PARAMETERS)
             throw new IncorrectAmountOfParameters();
         return true;
     }
@@ -19,4 +24,8 @@ class InputCheck {
         return true;
     }
 
+
+    public boolean isDate(String date) {
+        return false;
+    }
 }

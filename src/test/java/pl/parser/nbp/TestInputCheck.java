@@ -4,8 +4,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
+
 public class TestInputCheck {
 
+    public static final String CORRECT_CURRENCY = "EUR";
+    public static final String INCORRECT_CURRENCY = "PLN";
     private InputCheck inputCheck;
 
     @Before
@@ -37,7 +41,7 @@ public class TestInputCheck {
     @Test
     public void shouldReturnTrueWhenFirstParameterIsSupportedCurrency(){
         //given
-        String currency = "EUR";
+        String currency = CORRECT_CURRENCY;
         //when
         boolean knownCurrency = inputCheck.verifyCurrency(currency);
         //then
@@ -47,9 +51,19 @@ public class TestInputCheck {
     @Test(expected = UnrecognizedCurrency.class)
     public void shouldReturnErrorWhenFirstParameterIsNotSupportedCurrency(){
         //given
-        String currency = "PLN";
+        String currency = INCORRECT_CURRENCY;
         //when
         inputCheck.verifyCurrency(currency);
         //then
+    }
+
+    @Test
+    public void shouldIsDateReturnTrueWhenParameterIsDate(){
+        //given
+        String date = "2018-01-01";
+        //when
+        boolean isDate = inputCheck.isDate(date);
+        //then
+        Assert.assertTrue(isDate);
     }
 }
