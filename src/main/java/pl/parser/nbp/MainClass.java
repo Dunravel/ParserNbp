@@ -6,5 +6,7 @@ public class MainClass {
         InputCheck inputCheck = new InputCheck();
         inputCheck.verify(args);
 
+        NbpConnector nbpData = new NbpConnector();
+
     }
 }
