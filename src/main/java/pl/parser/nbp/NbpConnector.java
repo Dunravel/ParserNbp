@@ -6,7 +6,7 @@ import java.util.List;
 
 class NbpConnector {
 
-    List<String> craeteCatalogList(String startDate, String endDate) {
+    List<String> createCatalogList(String startDate, String endDate) {
         int startYear = Integer.parseInt(startDate.substring(0,4));
         int endYear = Integer.parseInt(endDate.substring(0,4));
 
@@ -23,4 +23,7 @@ class NbpConnector {
     }
 
 
+    List<String> createFileList(List<String> catalogList) {
+        return null;
+    }
 }

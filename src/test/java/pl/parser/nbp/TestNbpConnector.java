@@ -28,7 +28,7 @@ public class TestNbpConnector {
         String endDate = previousYear + "-01-10";
 
         //when
-        List<String> fileLists = nbpConnector.craeteCatalogList(startDate, endDate);
+        List<String> fileLists = nbpConnector.createCatalogList(startDate, endDate);
         //then
         Assert.assertEquals(fileLists, Arrays.asList("dir" + previousYear + ".txt"));
     }
@@ -39,8 +39,30 @@ public class TestNbpConnector {
         String startDate = previousYear + "-01-01";
         String endDate = currentYear + "-01-01";
         //when
-        List<String> fileLists = nbpConnector.craeteCatalogList(startDate, endDate);
+        List<String> fileLists = nbpConnector.createCatalogList(startDate, endDate);
         //then
         Assert.assertEquals(fileLists, Arrays.asList("dir" + previousYear + ".txt", "dir.txt"));
+    }
+
+    @Test
+    public void shouldCraeteFileListReturnCorrectListOfFilenames(){
+        //given
+        String startDate = "2018-12-31";
+        String endDate = "2019-01-03";
+        List<String> catalogList = nbpConnector.createCatalogList(startDate,endDate);
+        List<String> result = Arrays.asList("c252z181231.xml",
+                "h252z181231.xml",
+                "a252z181231.xml",
+                "c001z190102.xml",
+                "h001z190102.xml",
+                "a001z190102.xml",
+                "b001z190102.xml",
+                "c002z190103.xml",
+                "h002z190103.xml",
+                "a002z190103");
+        //when
+        List<String> fileList = nbpConnector.createFileList(catalogList);
+        //then
+        Assert.assertEquals(fileList,result);
     }
 }
