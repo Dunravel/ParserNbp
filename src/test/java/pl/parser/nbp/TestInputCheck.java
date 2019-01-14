@@ -65,5 +65,13 @@ public class TestInputCheck {
         Assert.assertTrue(isDate);
     }
 
+    @Test(expected = IncorrectDate.class)
+    public void shouldIsDateReturnErrorWhenParameterIsNotDate(){
+        //given
+        String date = "2018-02-30";
+        //when
+        inputCheck.isDate(date);
+    }
+
 
 }
