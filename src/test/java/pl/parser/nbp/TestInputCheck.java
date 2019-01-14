@@ -10,6 +10,8 @@ public class TestInputCheck {
 
     private static final String CORRECT_CURRENCY = "EUR";
     private static final String INCORRECT_CURRENCY = "PLN";
+    private static final String CORRECT_DATE = "2018-01-01";
+    private static final String INCORRECT_DATE = "2018-02-30";
     private InputCheck inputCheck;
 
     @Before
@@ -58,30 +60,24 @@ public class TestInputCheck {
     @Test
     public void shouldIsDateReturnTrueWhenParameterIsDate(){
         //given
-        String startDate = "2018-01-01";
-        String endDate = "2018-01-01";
         //when
-        boolean isDate = inputCheck.isDate(date);
+        boolean isDate = inputCheck.areDatesCorrect(CORRECT_DATE, CORRECT_DATE);
         //then
         Assert.assertTrue(isDate);
     }
 
     @Test(expected = IncorrectDate.class)
-    public void shouldareDatesCorrectReturnErrorWhenFirstParameterIsNotDate(){
+    public void shouldAreDatesCorrectReturnErrorWhenFirstParameterIsNotDate(){
         //given
-        String startDate = "2018-02-30";
-        String endDate = "2018-01-01";
         //when
-        inputCheck.isDate(date);
+        inputCheck.areDatesCorrect(INCORRECT_DATE, CORRECT_DATE);
     }
 
     @Test(expected = IncorrectDate.class)
-    public void shouldareDatesCorrectReturnErrorWhenSecondParameterIsNotDate(){
+    public void shouldAreDatesCorrectReturnErrorWhenSecondParameterIsNotDate(){
         //given
-        String startDate = "2018-01-01";
-        String endDate = "2018-02-30";
         //when
-        inputCheck.areDatesCorrect(startDate, endDate);
+        inputCheck.areDatesCorrect(CORRECT_DATE, INCORRECT_DATE);
     }
 
 }
