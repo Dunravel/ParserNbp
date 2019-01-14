@@ -19,7 +19,6 @@ public class TestInputCheck {
     public void shouldReturnErrorWhenIncorrectAmountOfParameters(){
         //given
         String args[] = {"1","2"};
-
         //when
         inputCheck.verifyAmount(args);
         //then
@@ -29,21 +28,20 @@ public class TestInputCheck {
     public void shouldReturnTrueWhenAmountOfParametersIsThree(){
         //given
         String args[] = {"1","2","3"};
-        inputCheck = new InputCheck();
         //when
         boolean isThree = inputCheck.verifyAmount(args);
         //then
         Assert.assertTrue(isThree);
     }
 
-    @Test(expected = UnrecognizedCurrency.class)
-    public void shouldReturnErrorWhenFirstParameterIsNotSupportedCurrency(){
+    @Test
+    public void shouldReturnTrueWhenFirstParameterIsSupportedCurrency(){
         //given
-        String args[] = {"PLN","2","3"};
-        InputCheck inputCheck = new InputCheck();
+        String currency = "EUR";
         //when
-        inputCheck.verifyCurrency(args[0]);
+        boolean knownCurrency = inputCheck.verifyCurrency(currency);
         //then
+        Assert.assertTrue(knownCurrency);
     }
 
 
