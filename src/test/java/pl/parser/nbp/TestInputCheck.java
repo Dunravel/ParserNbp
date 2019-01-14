@@ -14,6 +14,7 @@ public class TestInputCheck {
     private static final String INCORRECT_DATE = "2018-02-30";
     private InputCheck inputCheck;
     private static final String SECOND_CORRECT_DATE = "2018-02-02";
+    private static final String OUT_OF_RANGE_DATE = "2001-10-10";
 
     @Before
     public void setUp() {
@@ -86,6 +87,15 @@ public class TestInputCheck {
         //given
         //when
         inputCheck.areDatesCorrect(SECOND_CORRECT_DATE,FIRST_CORRECT_DATE);
+        //then
+    }
+
+    @Test(expected = IncorrectDatePeriod.class)
+    public void shouldAreDatesCorrectReturnErrorWhenYearIsBefore2002(){
+        //given
+        //when
+        inputCheck.areDatesCorrect(OUT_OF_RANGE_DATE,SECOND_CORRECT_DATE);
+        //then
     }
 
 }
