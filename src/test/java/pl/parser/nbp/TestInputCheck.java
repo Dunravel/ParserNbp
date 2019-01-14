@@ -8,8 +8,8 @@ import java.time.LocalDate;
 
 public class TestInputCheck {
 
-    public static final String CORRECT_CURRENCY = "EUR";
-    public static final String INCORRECT_CURRENCY = "PLN";
+    private static final String CORRECT_CURRENCY = "EUR";
+    private static final String INCORRECT_CURRENCY = "PLN";
     private InputCheck inputCheck;
 
     @Before
@@ -41,9 +41,8 @@ public class TestInputCheck {
     @Test
     public void shouldReturnTrueWhenFirstParameterIsSupportedCurrency(){
         //given
-        String currency = CORRECT_CURRENCY;
         //when
-        boolean knownCurrency = inputCheck.verifyCurrency(currency);
+        boolean knownCurrency = inputCheck.verifyCurrency(CORRECT_CURRENCY);
         //then
         Assert.assertTrue(knownCurrency);
     }
@@ -51,9 +50,8 @@ public class TestInputCheck {
     @Test(expected = UnrecognizedCurrency.class)
     public void shouldReturnErrorWhenFirstParameterIsNotSupportedCurrency(){
         //given
-        String currency = INCORRECT_CURRENCY;
         //when
-        inputCheck.verifyCurrency(currency);
+        inputCheck.verifyCurrency(INCORRECT_CURRENCY);
         //then
     }
 
@@ -66,4 +64,6 @@ public class TestInputCheck {
         //then
         Assert.assertTrue(isDate);
     }
+
+
 }

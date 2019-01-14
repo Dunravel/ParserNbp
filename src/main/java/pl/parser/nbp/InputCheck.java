@@ -5,12 +5,11 @@ import java.text.SimpleDateFormat;
 
 class InputCheck {
 
-    public static final int CORRECT_AMOUNT_OF_PARAMETERS = 3;
+    private static final int CORRECT_AMOUNT_OF_PARAMETERS = 3;
 
     void verify(String[] args) {
         verifyAmount(args);
         verifyCurrency(args[0]);
-
     }
 
 
