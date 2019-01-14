@@ -29,10 +29,11 @@ class InputCheck {
 
     boolean isDate(String date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        simpleDateFormat.setLenient(false);
         try{
             simpleDateFormat.parse(date.trim());
         } catch (ParseException e) {
-            return false;
+            throw new IncorrectDate();
         }
         return true;
     }
