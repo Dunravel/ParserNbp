@@ -58,7 +58,8 @@ public class TestInputCheck {
     @Test
     public void shouldIsDateReturnTrueWhenParameterIsDate(){
         //given
-        String date = "2018-01-01";
+        String startDate = "2018-01-01";
+        String endDate = "2018-01-01";
         //when
         boolean isDate = inputCheck.isDate(date);
         //then
@@ -66,12 +67,12 @@ public class TestInputCheck {
     }
 
     @Test(expected = IncorrectDate.class)
-    public void shouldIsDateReturnErrorWhenParameterIsNotDate(){
+    public void shouldIsDateReturnErrorWhenFirstParameterIsNotDate(){
         //given
-        String date = "2018-02-30";
+        String startDate = "2018-02-30";
+        String endDate = "2018-01-01";
         //when
         inputCheck.isDate(date);
     }
-
 
 }

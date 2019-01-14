@@ -31,7 +31,7 @@ class InputCheck {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         simpleDateFormat.setLenient(false);
         try{
-            simpleDateFormat.parse(date.trim());
+            simpleDateFormat.parse(startDate.trim());
         } catch (ParseException e) {
             throw new IncorrectDate();
         }
