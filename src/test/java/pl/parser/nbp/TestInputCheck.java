@@ -75,4 +75,13 @@ public class TestInputCheck {
         inputCheck.isDate(date);
     }
 
+    @Test(expected = IncorrectDate.class)
+    public void shouldIsDateReturnErrorWhenSecondParameterIsNotDate(){
+        //given
+        String startDate = "2018-01-01";
+        String endDate = "2018-02-30";
+        //when
+        inputCheck.areDatesCorrect(startDate, endDate);
+    }
+
 }
