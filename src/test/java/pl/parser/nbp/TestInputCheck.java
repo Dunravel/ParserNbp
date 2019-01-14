@@ -58,7 +58,7 @@ public class TestInputCheck {
     }
 
     @Test
-    public void shouldIsDateReturnTrueWhenParameterIsDate(){
+    public void shouldIsDateReturnTrueWhenParametersAreCorrectDates(){
         //given
         //when
         boolean isDate = inputCheck.areDatesCorrect(FIRST_CORRECT_DATE, FIRST_CORRECT_DATE);
@@ -86,7 +86,6 @@ public class TestInputCheck {
         String secondCorrectDate = "2018-02-02";
         //when
         inputCheck.areDatesCorrect(secondCorrectDate,FIRST_CORRECT_DATE);
-
     }
 
 }
