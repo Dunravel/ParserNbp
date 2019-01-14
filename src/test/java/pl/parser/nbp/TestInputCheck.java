@@ -67,7 +67,7 @@ public class TestInputCheck {
     }
 
     @Test(expected = IncorrectDate.class)
-    public void shouldIsDateReturnErrorWhenFirstParameterIsNotDate(){
+    public void shouldareDatesCorrectReturnErrorWhenFirstParameterIsNotDate(){
         //given
         String startDate = "2018-02-30";
         String endDate = "2018-01-01";
@@ -76,7 +76,7 @@ public class TestInputCheck {
     }
 
     @Test(expected = IncorrectDate.class)
-    public void shouldIsDateReturnErrorWhenSecondParameterIsNotDate(){
+    public void shouldareDatesCorrectReturnErrorWhenSecondParameterIsNotDate(){
         //given
         String startDate = "2018-01-01";
         String endDate = "2018-02-30";

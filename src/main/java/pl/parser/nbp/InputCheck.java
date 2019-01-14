@@ -32,6 +32,7 @@ class InputCheck {
         simpleDateFormat.setLenient(false);
         try{
             simpleDateFormat.parse(startDate.trim());
+            simpleDateFormat.parse(endDate.trim());
         } catch (ParseException e) {
             throw new IncorrectDate();
         }
