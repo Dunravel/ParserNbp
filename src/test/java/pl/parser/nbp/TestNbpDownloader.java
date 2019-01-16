@@ -5,8 +5,11 @@ import org.junit.Test;
 
 
 import java.io.BufferedReader;
+import java.util.Arrays;
+import java.util.List;
 
 public class TestNbpDownloader {
+    public static final int DIR_2018_AMOUNT_OF_ENTRIES = 808;
 
     @Test
     public void shouldConnectToFileCreateNewBufferReader(){
@@ -19,4 +22,14 @@ public class TestNbpDownloader {
         Assert.assertNotEquals(bufferedReader,null);
     }
 
+    @Test
+    public void shouldGetFileListReturnCompleteListForCatalog(){
+        //given
+        NbpDownloader nbpDownloader = new NbpDownloader();
+        List<String> catalogList = Arrays.asList("dir2018.txt");
+        //when
+        List<String> result = nbpDownloader.getFileList(catalogList);
+        //then
+        Assert.assertEquals(result.size(), DIR_2018_AMOUNT_OF_ENTRIES);
+    }
 }
