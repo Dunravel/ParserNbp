@@ -1,5 +1,9 @@
 package pl.parser.nbp;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +32,31 @@ class NbpConnector {
     }
 
 
-    List<String> createFileList(List<String> catalogList) {
-        return null;
+    List<String> createFileList(List<String> catalogList, String startDate, String endDate) {
+
+        List<String> fileList = new ArrayList<>();
+
+        FileNameCheck fileNameCheck = new FileNameCheck(REQUIRED_TABLE_TYPE,startDate,endDate);
+
+        for (String catalogName : catalogList) {
+            try {
+                URL catalogFile = new URL("https://www.nbp.pl/kursy/xml/" + catalogName);
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(catalogFile.openStream()));
+
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    String resultLine;
+                    if ((resultLine = fileNameCheck.getCorrectFileName(inputLine)) != null) {
+                        fileList.add(resultLine+ ".xml");
+                    }
+                }
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return fileList;
     }
 }
