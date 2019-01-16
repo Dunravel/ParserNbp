@@ -22,7 +22,7 @@ public class TestNbpConnector {
     }
 
     @Test
-    public void shouldCraeteCatalogListReturnCorrectListOfFilenamesForPreviousYear() {
+    public void shouldCreateCatalogListReturnCorrectListOfFilenamesForPreviousYear() {
         //given
         String startDate = previousYear + "-01-01";
         String endDate = previousYear + "-01-10";
@@ -34,7 +34,7 @@ public class TestNbpConnector {
     }
 
     @Test
-    public void shouldCrateCatalogListReturnCorrectListOfFilenamesForCurrentYear() {
+    public void shouldCreateCatalogListReturnCorrectListOfFilenamesForCurrentYear() {
         //given
         String startDate = previousYear + "-01-01";
         String endDate = currentYear + "-01-01";
@@ -45,21 +45,16 @@ public class TestNbpConnector {
     }
 
     @Test
-    public void shouldCraeteFileListReturnCorrectListOfFilenames(){
+    public void shouldCreateFileListReturnCorrectListOfFilenames(){
         //given
         String startDate = "2018-12-31";
         String endDate = "2019-01-03";
         List<String> catalogList = nbpConnector.createCatalogList(startDate,endDate);
         List<String> result = Arrays.asList("c252z181231.xml",
-                "h252z181231.xml",
-                "a252z181231.xml",
                 "c001z190102.xml",
-                "h001z190102.xml",
-                "a001z190102.xml",
-                "b001z190102.xml",
-                "c002z190103.xml",
-                "h002z190103.xml",
-                "a002z190103");
+                "c002z190103.xml"
+                );
+
         //when
         List<String> fileList = nbpConnector.createFileList(catalogList,startDate,endDate);
         //then
