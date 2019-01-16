@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-class NbpConnector {
+class NbpData {
 
     private static final String REQUIRED_TABLE_TYPE = "c";
     private static final String CATALOG_NAME_HEADER = "dir";
@@ -33,9 +33,7 @@ class NbpConnector {
 
 
     List<String> createFileList(List<String> catalogList, String startDate, String endDate) {
-
         List<String> fileList = new ArrayList<>();
-
         FileNameCheck fileNameCheck = new FileNameCheck(REQUIRED_TABLE_TYPE,startDate,endDate);
 
         for (String catalogName : catalogList) {
