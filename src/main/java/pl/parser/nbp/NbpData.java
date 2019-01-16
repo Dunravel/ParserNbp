@@ -10,7 +10,6 @@ class NbpData {
     private static final String CATALOG_NAME_HEADER = "dir";
     private static final String CATALOG_NAME_FOOTER = ".txt";
     private static final String CURRENT_YEAR_CATALOG_NAME = "dir.txt";
-    private static final String NBP_URL = "https://www.nbp.pl/kursy/xml/";
 
 
     List<String> createCatalogList(String startDate, String endDate) {
