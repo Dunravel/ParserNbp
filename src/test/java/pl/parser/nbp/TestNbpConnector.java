@@ -41,6 +41,7 @@ public class TestNbpConnector {
         //when
         List<String> fileLists = nbpConnector.createCatalogList(startDate, endDate);
         //then
+        System.out.println(fileLists);
         Assert.assertEquals(fileLists, Arrays.asList("dir" + previousYear + ".txt", "dir.txt"));
     }
 
@@ -61,7 +62,7 @@ public class TestNbpConnector {
                 "h002z190103.xml",
                 "a002z190103");
         //when
-        List<String> fileList = nbpConnector.createFileList(catalogList);
+        List<String> fileList = nbpConnector.createFileList(catalogList,startDate,endDate);
         //then
         Assert.assertEquals(fileList,result);
     }
