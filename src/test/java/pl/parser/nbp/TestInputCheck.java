@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.LocalDate;
-
 public class TestInputCheck {
 
     private static final String CORRECT_CURRENCY = "EUR";
