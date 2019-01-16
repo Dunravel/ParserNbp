@@ -1,11 +1,11 @@
 package pl.parser.nbp;
 
-class FileNameCheck {
+class FileNameFilter {
     private String tableType;
     private String startDate;
     private String endDate;
 
-    FileNameCheck(String tableType, String startDate, String endDate){
+    FileNameFilter(String tableType, String startDate, String endDate){
         this.tableType = tableType;
         this.startDate = startDate.substring(2,4) + startDate.substring(5,7) + startDate.substring(8,10);
         this.endDate = endDate.substring(2,4) + endDate.substring(5,7) + endDate.substring(8,10);

@@ -34,7 +34,7 @@ class NbpData {
 
     List<String> createFileList(List<String> catalogList, String startDate, String endDate) {
         List<String> fileList = new ArrayList<>();
-        FileNameCheck fileNameCheck = new FileNameCheck(REQUIRED_TABLE_TYPE,startDate,endDate);
+        FileNameFilter fileNameFilter = new FileNameFilter(REQUIRED_TABLE_TYPE,startDate,endDate);
 
         for (String catalogName : catalogList) {
             try {
@@ -45,7 +45,7 @@ class NbpData {
                 String inputLine;
                 while ((inputLine = in.readLine()) != null) {
                     String resultLine;
-                    if ((resultLine = fileNameCheck.getCorrectFileName(inputLine)) != null) {
+                    if ((resultLine = fileNameFilter.getCorrectFileName(inputLine)) != null) {
                         fileList.add(resultLine+ ".xml");
                     }
                 }
