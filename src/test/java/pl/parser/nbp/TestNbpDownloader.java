@@ -25,7 +25,7 @@ public class TestNbpDownloader {
         //when
         BufferedReader bufferedReader = nbpDownloader.connectToFile(CATALOG_NAME_2018);
         //then
-        Assert.assertNotEquals(bufferedReader,null);
+        Assert.assertNotNull(bufferedReader);
     }
 
     @Test
@@ -36,6 +36,6 @@ public class TestNbpDownloader {
         //when
         List<String> result = nbpDownloader.getFileList(catalogList);
         //then
-        Assert.assertEquals(result.size(), DIR_2018_AMOUNT_OF_ENTRIES);
+        Assert.assertEquals(DIR_2018_AMOUNT_OF_ENTRIES, result.size());
     }
 }
