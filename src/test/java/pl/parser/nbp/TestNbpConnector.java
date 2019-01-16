@@ -41,7 +41,6 @@ public class TestNbpConnector {
         //when
         List<String> fileLists = nbpConnector.createCatalogList(startDate, endDate);
         //then
-        System.out.println(fileLists);
         Assert.assertEquals(fileLists, Arrays.asList("dir" + previousYear + ".txt", "dir.txt"));
     }
 
