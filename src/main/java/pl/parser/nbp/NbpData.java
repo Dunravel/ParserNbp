@@ -14,6 +14,7 @@ class NbpData {
     private static final String CATALOG_NAME_HEADER = "dir";
     private static final String CATALOG_NAME_FOOTER = ".txt";
     private static final String CURRENT_YEAR_CATALOG_NAME = "dir.txt";
+    public static final String NBP_URL = "https://www.nbp.pl/kursy/xml/";
 
     List<String> createCatalogList(String startDate, String endDate) {
         int startYear = Integer.parseInt(startDate.substring(0,4));
@@ -38,7 +39,7 @@ class NbpData {
 
         for (String catalogName : catalogList) {
             try {
-                URL catalogFile = new URL("https://www.nbp.pl/kursy/xml/" + catalogName);
+                URL catalogFile = new URL(NBP_URL + catalogName);
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(catalogFile.openStream()));
 
