@@ -6,6 +6,8 @@ import java.util.List;
 
 class NbpConnector {
 
+    private static final String REQUIRED_TABLE_TYPE = "c";
+
     List<String> createCatalogList(String startDate, String endDate) {
         int startYear = Integer.parseInt(startDate.substring(0,4));
         int endYear = Integer.parseInt(endDate.substring(0,4));
