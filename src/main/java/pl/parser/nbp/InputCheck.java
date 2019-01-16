@@ -28,8 +28,7 @@ class InputCheck {
         return true;
     }
 
-
-    boolean isDate(String date) {
+    boolean areDatesCorrect(String startDate, String endDate) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         simpleDateFormat.setLenient(false);
         try{
