@@ -14,7 +14,8 @@ class NbpData {
     private static final String CATALOG_NAME_HEADER = "dir";
     private static final String CATALOG_NAME_FOOTER = ".txt";
     private static final String CURRENT_YEAR_CATALOG_NAME = "dir.txt";
-    public static final String NBP_URL = "https://www.nbp.pl/kursy/xml/";
+    private static final String NBP_URL = "https://www.nbp.pl/kursy/xml/";
+    private static final String FILE_NAME_FOOTER = ".xml";
 
     List<String> createCatalogList(String startDate, String endDate) {
         int startYear = Integer.parseInt(startDate.substring(0,4));
@@ -47,7 +48,7 @@ class NbpData {
                 while ((inputLine = in.readLine()) != null) {
                     String resultLine;
                     if ((resultLine = fileNameFilter.getCorrectFileName(inputLine)) != null) {
-                        fileList.add(resultLine+ ".xml");
+                        fileList.add(resultLine+ FILE_NAME_FOOTER);
                     }
                 }
                 in.close();
