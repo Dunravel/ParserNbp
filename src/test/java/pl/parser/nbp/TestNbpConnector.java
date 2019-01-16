@@ -10,6 +10,10 @@ import java.util.List;
 
 public class TestNbpConnector {
 
+    private static final String CATALOG_NAME_HEADER = "dir";
+    private static final String CATALOG_NAME_FOOTER = ".txt";
+    private static final String CURRENT_YEAR_CATALOG_NAME = "dir.txt";
+
     private NbpConnector nbpConnector;
     private int currentYear;
     private int previousYear;
@@ -30,7 +34,7 @@ public class TestNbpConnector {
         //when
         List<String> fileLists = nbpConnector.createCatalogList(startDate, endDate);
         //then
-        Assert.assertEquals(fileLists, Arrays.asList("dir" + previousYear + ".txt"));
+        Assert.assertEquals(fileLists, Arrays.asList(CATALOG_NAME_HEADER + previousYear + CATALOG_NAME_FOOTER));
     }
 
     @Test
@@ -41,7 +45,7 @@ public class TestNbpConnector {
         //when
         List<String> fileLists = nbpConnector.createCatalogList(startDate, endDate);
         //then
-        Assert.assertEquals(fileLists, Arrays.asList("dir" + previousYear + ".txt", "dir.txt"));
+        Assert.assertEquals(fileLists, Arrays.asList(CATALOG_NAME_HEADER + previousYear + CATALOG_NAME_FOOTER, CURRENT_YEAR_CATALOG_NAME));
     }
 
     @Test
