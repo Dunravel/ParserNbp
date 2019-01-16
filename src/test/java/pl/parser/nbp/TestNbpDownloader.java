@@ -1,6 +1,7 @@
 package pl.parser.nbp;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 
@@ -9,15 +10,20 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TestNbpDownloader {
-    public static final int DIR_2018_AMOUNT_OF_ENTRIES = 808;
+    private static final int DIR_2018_AMOUNT_OF_ENTRIES = 808;
+    private static final String CATALOG_NAME_2018 = "dir2018.txt";
+    private NbpDownloader nbpDownloader;
 
+    @Before
+    public void setUp(){
+        nbpDownloader = new NbpDownloader();
+    }
     @Test
     public void shouldConnectToFileCreateNewBufferReader(){
         //given
-        NbpDownloader nbpDownloader = new NbpDownloader();
-        String catalogName = "dir2018.txt";
+        nbpDownloader = new NbpDownloader();
         //when
-        BufferedReader bufferedReader = nbpDownloader.connectToFile(catalogName);
+        BufferedReader bufferedReader = nbpDownloader.connectToFile(CATALOG_NAME_2018);
         //then
         Assert.assertNotEquals(bufferedReader,null);
     }
@@ -25,8 +31,8 @@ public class TestNbpDownloader {
     @Test
     public void shouldGetFileListReturnCompleteListForCatalog(){
         //given
-        NbpDownloader nbpDownloader = new NbpDownloader();
-        List<String> catalogList = Arrays.asList("dir2018.txt");
+        nbpDownloader = new NbpDownloader();
+        List<String> catalogList = Arrays.asList(CATALOG_NAME_2018);
         //when
         List<String> result = nbpDownloader.getFileList(catalogList);
         //then
