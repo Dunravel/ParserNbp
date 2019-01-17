@@ -1,6 +1,7 @@
 package pl.parser.nbp;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -20,7 +21,7 @@ public class NbpConnector {
             catalogConnection = new BufferedReader(
                     new InputStreamReader(catalogFile.openStream()));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new NoFileFoundException();
         }
     }
 
