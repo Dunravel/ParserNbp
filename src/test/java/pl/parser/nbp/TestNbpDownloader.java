@@ -19,7 +19,6 @@ public class TestNbpDownloader {
     @Test
     public void shouldConnectToFileCreateNewBufferReader(){
         //given
-        nbpDownloader = new NbpDownloader();
         //when
         BufferedReader bufferedReader = nbpDownloader.connectToFile(CATALOG_NAME_2018);
         //then
@@ -29,7 +28,6 @@ public class TestNbpDownloader {
     @Test
     public void shouldGetFileListReturnCompleteListForCatalog(){
         //given
-        nbpDownloader = new NbpDownloader();
         Set<String> catalogList = Sets.newSet(CATALOG_NAME_2018);
         //when
         Set<String> result = nbpDownloader.getFileList(catalogList);
