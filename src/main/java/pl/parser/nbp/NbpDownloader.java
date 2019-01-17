@@ -13,12 +13,12 @@ public class NbpDownloader {
         Set<String> fileList = new HashSet<>();
 
         for (String catalogName : catalogList) {
-            fileList.addAll(getFileListFrpmCatalog(catalogName));
+            fileList.addAll(getFileListFromCatalog(catalogName));
         }
         return fileList;
     }
 
-    private Set<String> getFileListFrpmCatalog(String catalogName) {
+    private Set<String> getFileListFromCatalog(String catalogName) {
         Set<String> files = new HashSet<>() ;
         NbpConnector nbpConnector = new NbpConnector();
         nbpConnector.connectToCatalog(catalogName);
