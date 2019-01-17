@@ -1,5 +1,6 @@
-package pl.parser.nbp;
+package pl.parser.nbp.nbp;
 
+import pl.parser.nbp.NoFileFoundException;
 import pl.parser.nbp.domain.CurrencyData;
 
 import java.io.BufferedReader;
@@ -15,30 +16,30 @@ public class NbpDownloader {
 
     public void getCurrencyFiles(Set<CurrencyData> currencyDataSet) {
         for(CurrencyData currencyData : currencyDataSet){
-            getCurrencyFileContent(new NbpConnector(), currencyData);
+            getCurrencyFileContent(new NbpCurrencyFileConnector(), currencyData);
         }
     }
 
     public void getCurrencyFileContent(NbpConnector nbpConnector, CurrencyData currencyData) {
         UrlFactory urlFactory = new UrlFactory();
-        InputStream in = nbpConnector.getCurrencyFileConnection(urlFactory.create(currencyData.getFileName()));
+        InputStream in = (InputStream) nbpConnector.getConnection(urlFactory.create(currencyData.getFileName()));
         NbpXmlReader nbpXmlReader = new NbpXmlReader(in);
         nbpXmlReader.getBuySellRate(currencyData);
-        nbpConnector.closeCurrencyFileConnection(in);
+        nbpConnector.closeConnection();
     }
 
     public Set<String> getFileList(Set<String> catalogList) {
         Set<String> fileList = new HashSet<>();
         UrlFactory urlFactory = new UrlFactory();
         for (String catalogName : catalogList) {
-            fileList.addAll(getFileListFromCatalog(new NbpConnector(),urlFactory.create(catalogName)));
+            fileList.addAll(getFileListFromCatalog(new NbpCatalogConnector(),urlFactory.create(catalogName)));
         }
         return fileList;
     }
 
     public Set<String> getFileListFromCatalog(NbpConnector nbpConnector,URL url) {
         Set<String> files = new HashSet<>() ;
-        BufferedReader reader = nbpConnector.connectToCatalog(url);
+        BufferedReader reader = (BufferedReader)nbpConnector.getConnection(url);
 
         try {
             String inputLine;
@@ -48,7 +49,7 @@ public class NbpDownloader {
         } catch (IOException e) {
             throw new NoFileFoundException();
         }
-        nbpConnector.closeCatalogConnection(reader);
+        nbpConnector.closeConnection();
         return files;
     }
 

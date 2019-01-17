@@ -1,4 +1,4 @@
-package pl.parser.nbp;
+package pl.parser.nbp.nbp;
 
 import pl.parser.nbp.domain.CurrencyData;
 

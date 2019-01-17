@@ -1,4 +1,4 @@
-package pl.parser.nbp;
+package pl.parser.nbp.nbp;
 
 import java.net.MalformedURLException;
 import java.net.URL;

@@ -1,10 +1,8 @@
-package pl.parser.nbp;
+package pl.parser.nbp.nbp;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.BDDMockito;
-import org.mockito.Mockito;
 import org.mockito.internal.util.collections.Sets;
 
 import java.util.Set;

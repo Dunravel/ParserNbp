@@ -3,6 +3,7 @@ package pl.parser.nbp;
 import pl.parser.nbp.domain.Currency;
 import pl.parser.nbp.domain.CurrencyData;
 import pl.parser.nbp.domain.CurrencyDataFactory;
+import pl.parser.nbp.nbp.NbpData;
 import pl.parser.nbp.validate.FileNameFilter;
 import pl.parser.nbp.validate.InputCheck;
 

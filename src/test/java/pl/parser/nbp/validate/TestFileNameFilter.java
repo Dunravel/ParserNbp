@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.internal.util.collections.Sets;
-import pl.parser.nbp.NoFilesFoundException;
+import pl.parser.nbp.NoFileFoundException;
 
 public class TestFileNameFilter {
 
@@ -12,11 +12,12 @@ public class TestFileNameFilter {
     private static final String CORRECT_FILE_NAME = "c252z181231.xml";
     private static final String INCORRECT_TABLE_FILE = "h252z181231.xml";
     private static final String INCORRECT_DATE_FILE = "c213z181102";
+    public static final String CURRENCY_TABLE_TYPE = "c";
     private FileNameFilter fileNameFilter;
 
     @Before
     public void setUp(){
-        fileNameFilter = new FileNameFilter(START_DATE,START_DATE);
+        fileNameFilter = new FileNameFilter(CURRENCY_TABLE_TYPE,START_DATE,START_DATE);
     }
     @Test
     public void shouldGetCorrectFileNameReturnFileName(){
@@ -45,7 +46,7 @@ public class TestFileNameFilter {
         Assert.assertNull(name);
     }
 
-    @Test(expected = NoFilesFoundException.class)
+    @Test(expected = NoFileFoundException.class)
     public void shouldFilterReturnErrorWhenNoCorrectFilesFound(){
         //given
         //when

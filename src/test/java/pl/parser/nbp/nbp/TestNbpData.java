@@ -1,4 +1,4 @@
-package pl.parser.nbp;
+package pl.parser.nbp.nbp;
 
 import org.junit.Assert;
 import org.junit.Before;
