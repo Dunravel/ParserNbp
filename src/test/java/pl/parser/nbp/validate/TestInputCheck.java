@@ -1,8 +1,9 @@
-package pl.parser.nbp;
+package pl.parser.nbp.validate;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import pl.parser.nbp.UnrecognizedCurrency;
 
 public class TestInputCheck {
 
@@ -21,7 +22,7 @@ public class TestInputCheck {
     }
 
 
-    @Test(expected = IncorrectAmountOfParameters.class)
+    @Test(expected = IncorrectAmountOfParametersException.class)
     public void shouldReturnErrorWhenIncorrectAmountOfParameters(){
         //given
         String args[] = {"1","2"};
@@ -66,21 +67,21 @@ public class TestInputCheck {
         Assert.assertTrue(isDate);
     }
 
-    @Test(expected = IncorrectDate.class)
+    @Test(expected = IncorrectDateException.class)
     public void shouldAreDatesCorrectReturnErrorWhenFirstParameterIsNotDate(){
         //given
         //when
         inputCheck.areDatesCorrect(INCORRECT_DATE, FIRST_CORRECT_DATE);
     }
 
-    @Test(expected = IncorrectDate.class)
+    @Test(expected = IncorrectDateException.class)
     public void shouldAreDatesCorrectReturnErrorWhenSecondParameterIsNotDate(){
         //given
         //when
         inputCheck.areDatesCorrect(FIRST_CORRECT_DATE, INCORRECT_DATE);
     }
 
-    @Test(expected = IncorrectDatePeriod.class)
+    @Test(expected = IncorrectDatePeriodException.class)
     public void shouldAreDatesCorrectReturnErrorWhenDatePeriodIsNotCorrect(){
         //given
         //when
@@ -88,7 +89,7 @@ public class TestInputCheck {
         //then
     }
 
-    @Test(expected = IncorrectDatePeriod.class)
+    @Test(expected = IncorrectDatePeriodException.class)
     public void shouldAreDatesCorrectReturnErrorWhenYearIsBefore2002(){
         //given
         //when

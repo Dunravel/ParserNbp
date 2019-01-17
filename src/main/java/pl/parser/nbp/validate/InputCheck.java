@@ -1,16 +1,19 @@
-package pl.parser.nbp;
+package pl.parser.nbp.validate;
+
+import pl.parser.nbp.UnrecognizedCurrency;
+import pl.parser.nbp.domain.Currency;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-class InputCheck {
+public class InputCheck {
 
     private static final int CORRECT_AMOUNT_OF_PARAMETERS = 3;
     private static final String MINIMUM_DATE = "2002-01-01";
 
 
-    void verify(String[] args) {
+    public void verify(String[] args) {
         verifyAmount(args);
         verifyCurrency(args[0]);
         areDatesCorrect(args[1],args[2]);
@@ -18,7 +21,7 @@ class InputCheck {
 
     boolean verifyAmount(String[] args) {
         if(args.length != CORRECT_AMOUNT_OF_PARAMETERS)
-            throw new IncorrectAmountOfParameters();
+            throw new IncorrectAmountOfParametersException();
         return true;
     }
 
@@ -36,14 +39,14 @@ class InputCheck {
             Date dateEnd = simpleDateFormat.parse(endDate.trim());
 
             if(dateStart.before(simpleDateFormat.parse(MINIMUM_DATE))){
-                throw new IncorrectDatePeriod();
+                throw new IncorrectDatePeriodException();
             }
 
             if(dateStart.after(dateEnd)){
-                throw new IncorrectDatePeriod();
+                throw new IncorrectDatePeriodException();
             }
         } catch (ParseException e) {
-            throw new IncorrectDate();
+            throw new IncorrectDateException();
         }
         return true;
     }
