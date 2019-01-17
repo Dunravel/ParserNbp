@@ -16,14 +16,7 @@ public class TestNbpDownloader {
     public void setUp(){
         nbpDownloader = new NbpDownloader();
     }
-    @Test
-    public void shouldConnectToFileCreateNewBufferReader(){
-        //given
-        //when
-        BufferedReader bufferedReader = nbpDownloader.connectToFile(CATALOG_NAME_2018);
-        //then
-        Assert.assertNotNull(bufferedReader);
-    }
+
 
     @Test
     public void shouldGetFileListReturnCompleteListForCatalog(){
