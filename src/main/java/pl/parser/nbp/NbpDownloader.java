@@ -18,7 +18,7 @@ public class NbpDownloader {
         return fileList;
     }
 
-    private Set<String> getFileListFromCatalog(NbpConnector nbpConnector, String catalogName) {
+    public Set<String> getFileListFromCatalog(NbpConnector nbpConnector, String catalogName) {
         Set<String> files = new HashSet<>() ;
         nbpConnector.connectToCatalog(catalogName);
         BufferedReader reader = nbpConnector.getCatalogConnection();

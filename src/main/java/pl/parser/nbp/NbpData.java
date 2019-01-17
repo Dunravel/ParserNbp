@@ -1,7 +1,5 @@
 package pl.parser.nbp;
 
-
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,9 +42,8 @@ class NbpData {
         Set<String> catalogList = createCatalogList();
 
         NbpDownloader nbpDownloader = new NbpDownloader();
-        return nbpDownloader.getFileList(catalogList);
+        NbpConnector nbpConnector = new NbpConnector();
+        return nbpDownloader.getFileList(nbpConnector,catalogList);
     }
-
-
 
 }
