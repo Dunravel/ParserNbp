@@ -47,7 +47,6 @@ public class TestFileNameFilter {
     @Test(expected = NoFilesFoundException.class)
     public void shouldFilterReturnErrorWhenNoCorrectFilesFound(){
         //given
-
         //when
         fileNameFilter.filter(Sets.newSet("1234.xml"));
         //then
