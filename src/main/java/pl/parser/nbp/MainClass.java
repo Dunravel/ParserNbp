@@ -1,6 +1,7 @@
 package pl.parser.nbp;
 
 import pl.parser.nbp.domain.Currency;
+import pl.parser.nbp.domain.CurrencyCalculation;
 import pl.parser.nbp.domain.CurrencyData;
 import pl.parser.nbp.domain.CurrencyDataFactory;
 import pl.parser.nbp.nbp.NbpData;
@@ -36,6 +37,14 @@ public class MainClass {
 
         nbpData.getFilesContent(currencyDataSet);
         System.out.println(currencyDataSet);
+
+        CurrencyCalculation currencyCalculation = new CurrencyCalculation(currencyDataSet);
+        double averageBuyRate = currencyCalculation.getAverageBuyRate();
+        double deviationSellRate = currencyCalculation.getDeviationSellRate();
+
+        Displayer displayer = new Displayer();
+        displayer.displayDoubleToScreen(averageBuyRate);
+        displayer.displayDoubleToScreen(deviationSellRate);
 
     }
 }
