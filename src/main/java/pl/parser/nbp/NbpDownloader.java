@@ -13,20 +13,26 @@ public class NbpDownloader {
         Set<String> fileList = new HashSet<>();
 
         for (String catalogName : catalogList) {
-            NbpConnector nbpConnector = new NbpConnector();
-            nbpConnector.connectToCatalog(catalogName);
-            BufferedReader reader = nbpConnector.getCatalogConnection();
-            try {
-                String inputLine;
-                while ((inputLine = reader.readLine()) != null) {
-                    fileList.add(inputLine + FILE_NAME_FOOTER);
-                }
-            } catch (IOException e) {
-                throw new NoFileFoundException();
-            }
-            nbpConnector.closeCatalogConnection();
+            fileList.addAll(getFileListFrpmCatalog(catalogName));
         }
         return fileList;
+    }
+
+    private Set<String> getFileListFrpmCatalog(String catalogName) {
+        Set<String> files = new HashSet<>() ;
+        NbpConnector nbpConnector = new NbpConnector();
+        nbpConnector.connectToCatalog(catalogName);
+        BufferedReader reader = nbpConnector.getCatalogConnection();
+        try {
+            String inputLine;
+            while ((inputLine = reader.readLine()) != null) {
+                files.add(inputLine + FILE_NAME_FOOTER);
+            }
+        } catch (IOException e) {
+            throw new NoFileFoundException();
+        }
+        nbpConnector.closeCatalogConnection();
+        return files;
     }
 
 
