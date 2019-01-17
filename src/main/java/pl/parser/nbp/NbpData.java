@@ -1,5 +1,6 @@
 package pl.parser.nbp;
 
+import pl.parser.nbp.domain.CurrencyData;
 import pl.parser.nbp.validate.FileNameFilter;
 
 import java.time.LocalDate;
@@ -11,10 +12,13 @@ class NbpData {
     private static final String CATALOG_NAME_FOOTER = ".txt";
     private static final String CURRENT_YEAR_CATALOG_NAME = "dir.txt";
 
+    private String currencyTableType;
     private String startDate;
     private String endDate;
 
-    public NbpData(String startDate, String endDate){
+
+    public NbpData(String currencyTableType,String startDate, String endDate){
+        this.currencyTableType = currencyTableType;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -36,12 +40,21 @@ class NbpData {
     }
 
 
-    Set<String> createFileList(Set<String> catalogList) {
+    Set<String> createFileList() {
+        Set<String> catalogList = createCatalogList();
+
         NbpDownloader nbpDownloader = new NbpDownloader();
         Set<String> fileList = nbpDownloader.getFileList(catalogList);
-        FileNameFilter fileNameFilter = new FileNameFilter(startDate,endDate);
+        FileNameFilter fileNameFilter = new FileNameFilter(currencyTableType,startDate,endDate);
         return fileNameFilter.filter(fileList);
     }
 
 
+    public void getFileContent(Set<CurrencyData> currencyDataSet) {
+        CurrencyReader currencyReader = new CurrencyReader();
+        for(CurrencyData currencyData : currencyDataSet){
+            currencyReader.readFile(currencyData);
+        }
+
+    }
 }
