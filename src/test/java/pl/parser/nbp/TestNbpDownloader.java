@@ -3,8 +3,10 @@ package pl.parser.nbp;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.BDDMockito;
+import org.mockito.Mockito;
 import org.mockito.internal.util.collections.Sets;
-import java.io.BufferedReader;
+
 import java.util.Set;
 
 public class TestNbpDownloader {
@@ -17,6 +19,15 @@ public class TestNbpDownloader {
         nbpDownloader = new NbpDownloader();
     }
 
+    @Test(expected = NoFileFoundException.class)
+    public void shouldGetFileListReturnErrorWhenBufferedReaderIsNull(){
+        //given
+        NbpConnector nbpConnector = Mockito.mock(NbpConnector.class);
+        BDDMockito.given(nbpConnector.getCatalogConnection()).willReturn(null);
+        //when
+        nbpDownloader.getFileList(Sets.newSet(CATALOG_NAME_2018));
+        //then
+    }
 
     @Test
     public void shouldGetFileListReturnCompleteListForCatalog(){
