@@ -9,20 +9,22 @@ public class NbpDownloader {
 
     private static final String FILE_NAME_FOOTER = ".xml";
 
-    public Set<String> getFileList(Set<String> catalogList) {
+    public Set<String> getFileList(NbpConnector nbpConnector,Set<String> catalogList) {
         Set<String> fileList = new HashSet<>();
 
         for (String catalogName : catalogList) {
-            fileList.addAll(getFileListFromCatalog(catalogName));
+            fileList.addAll(getFileListFromCatalog(nbpConnector,catalogName));
         }
         return fileList;
     }
 
-    private Set<String> getFileListFromCatalog(String catalogName) {
+    private Set<String> getFileListFromCatalog(NbpConnector nbpConnector, String catalogName) {
         Set<String> files = new HashSet<>() ;
-        NbpConnector nbpConnector = new NbpConnector();
         nbpConnector.connectToCatalog(catalogName);
         BufferedReader reader = nbpConnector.getCatalogConnection();
+        if(reader == null){
+            throw new CatalogConnectionLostException();
+        }
         try {
             String inputLine;
             while ((inputLine = reader.readLine()) != null) {
