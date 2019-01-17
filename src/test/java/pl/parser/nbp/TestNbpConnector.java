@@ -11,8 +11,8 @@ public class TestNbpConnector {
     public void shouldConnectToCatalogReturnErrorWhenFileNotFound(){
         //given
         NbpConnector nbpConnector = new NbpConnector();
-        //when
         nbpConnector.connectToCatalog("test");
+        //when
         BufferedReader bufferedReader = nbpConnector.getCatalogConnection();
         //then
         Assert.assertNull(bufferedReader);
