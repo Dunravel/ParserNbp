@@ -21,7 +21,9 @@ class FileNameFilter {
                 filteredFileList.add(name);
             }
         }
-
+        if(filteredFileList.size()  == 0){
+            throw new NoFilesFoundException();
+        }
         return filteredFileList;
     }
 
