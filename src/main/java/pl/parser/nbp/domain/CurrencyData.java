@@ -1,6 +1,6 @@
 package pl.parser.nbp.domain;
 
-class CurrencyData {
+public class CurrencyData {
     private final String fileName;
     private final Currency currency;
     private double buyRate;
