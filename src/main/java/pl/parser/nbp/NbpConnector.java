@@ -38,6 +38,7 @@ public class NbpConnector {
 
 
     public InputStream getCurrencyFileConnection(String fileName) {
-        return null;
+        throw new CurrencyFileNotFoundException();
+
     }
 }
