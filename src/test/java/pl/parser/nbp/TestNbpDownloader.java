@@ -19,25 +19,15 @@ public class TestNbpDownloader {
         nbpDownloader = new NbpDownloader();
     }
 
-    @Test(expected = CatalogConnectionLostException.class)
-    public void shouldGetFileListFromCatalogReturnErrorWhenBufferedReaderIsNull(){
-        //given
-        NbpConnector nbpConnector = Mockito.mock(NbpConnector.class);
-        BDDMockito.given(nbpConnector.getCatalogConnection()).willReturn(null);
-        //when
-        nbpDownloader.getFileListFromCatalog(nbpConnector,CATALOG_NAME_2018);
-        //then
-    }
-
 
 
     @Test
     public void shouldGetFileListReturnCompleteListForCatalog(){
         //given
         Set<String> catalogList = Sets.newSet(CATALOG_NAME_2018);
-        NbpConnector nbpConnector = new NbpConnector();
+
         //when
-        Set<String> result = nbpDownloader.getFileList(nbpConnector,catalogList);
+        Set<String> result = nbpDownloader.getFileList(catalogList);
         //then
         Assert.assertEquals(DIR_2018_AMOUNT_OF_ENTRIES, result.size());
     }

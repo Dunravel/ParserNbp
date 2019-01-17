@@ -12,9 +12,9 @@ public class TestNbpConnector {
     public void shouldConnectToCatalogReturnErrorWhenFileNotFound(){
         //given
         NbpConnector nbpConnector = new NbpConnector();
-        nbpConnector.connectToCatalog("test");
+        UrlFactory urlFactory = new UrlFactory();
         //when
-        BufferedReader bufferedReader = nbpConnector.getCatalogConnection();
+        BufferedReader bufferedReader = nbpConnector.connectToCatalog(urlFactory.create("test"));;
         //then
         Assert.assertNull(bufferedReader);
     }
@@ -24,8 +24,9 @@ public class TestNbpConnector {
     public void shouldGetCurrencyFileConnectionReturnErrorWhenFileNotFound(){
         //given
         NbpConnector nbpConnector = new NbpConnector();
+        UrlFactory urlFactory = new UrlFactory();
         //when
-        nbpConnector.getCurrencyFileConnection("this-file-does-not-exist");
+        nbpConnector.getCurrencyFileConnection(urlFactory.create("this-file-does-not-exist"));
         //then
     }
 
@@ -33,8 +34,9 @@ public class TestNbpConnector {
     public void shouldGetCurrencyFileConnectionReturnInputStreamWhenFileExists(){
         //given
         NbpConnector nbpConnector = new NbpConnector();
+        UrlFactory urlFactory = new UrlFactory();
         //when
-        InputStream inputStream = nbpConnector.getCurrencyFileConnection("c023z130201.xml");
+        InputStream inputStream = nbpConnector.getCurrencyFileConnection(urlFactory.create("c023z130201.xml"));
         //then
         Assert.assertNotNull(inputStream);
     }

@@ -24,6 +24,8 @@ public class TestNbpData {
         previousYear = currentYear - 1;
     }
 
+
+
     @Test
     public void shouldCreateCatalogListReturnCorrectListOfFilenamesForPreviousYear() {
         //given
@@ -35,6 +37,7 @@ public class TestNbpData {
         //then
         Assert.assertEquals(fileLists, Sets.newSet(CATALOG_NAME_HEADER + previousYear + CATALOG_NAME_FOOTER));
     }
+
 
     @Test
     public void shouldCreateCatalogListReturnCorrectListOfFilenamesForCurrentYear() {

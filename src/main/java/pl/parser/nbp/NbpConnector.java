@@ -7,25 +7,17 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 public class NbpConnector {
-    private static final String NBP_URL = "https://www.nbp.pl/kursy/xml/";
 
-    BufferedReader catalogConnection;
-
-    public BufferedReader getCatalogConnection() {
-        return catalogConnection;
-    }
-
-    void connectToCatalog(String catalogName) {
+    BufferedReader connectToCatalog(URL catalogFile) {
         try {
-            URL catalogFile = new URL(NBP_URL + catalogName);
-            catalogConnection = new BufferedReader(
+            return new BufferedReader(
                     new InputStreamReader(catalogFile.openStream()));
         } catch (IOException e) {
             throw new NoFileFoundException();
         }
     }
 
-    void closeCatalogConnection(){
+    void closeCatalogConnection(BufferedReader catalogConnection){
             if(catalogConnection != null) {
                 try {
                     catalogConnection.close();
@@ -37,8 +29,23 @@ public class NbpConnector {
     }
 
 
-    public InputStream getCurrencyFileConnection(String fileName) {
-        throw new CurrencyFileNotFoundException();
+    public InputStream getCurrencyFileConnection(URL url) {
+        InputStream in;
+        try {
+            in = url.openStream(); //new FileInputStream(NBP_URL + currencyData.getFileName());
+        } catch (IOException e) {
+            throw new CurrencyFileNotFoundException();
+        }
+        return in;
+    }
 
+    public void closeCurrencyFileConnection(InputStream in){
+        if(in != null){
+            try {
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
