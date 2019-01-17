@@ -4,11 +4,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 
 public class TestNbpConnector {
 
-    @Test(expected = FileNotFoundException.class)
+    @Test(expected = NoFileFoundException.class)
     public void shouldConnectToCatalogReturnErrorWhenFileNotFound(){
         //given
         NbpConnector nbpConnector = new NbpConnector();
