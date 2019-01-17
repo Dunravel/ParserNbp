@@ -1,9 +1,10 @@
-package pl.parser.nbp;
+package pl.parser.nbp.validate;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.internal.util.collections.Sets;
+import pl.parser.nbp.NoFilesFoundException;
 
 public class TestFileNameFilter {
 
