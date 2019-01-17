@@ -5,14 +5,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 class NbpData {
-
-
     private static final String CATALOG_NAME_HEADER = "dir";
     private static final String CATALOG_NAME_FOOTER = ".txt";
     private static final String CURRENT_YEAR_CATALOG_NAME = "dir.txt";
 
+    private String startDate;
+    private String endDate;
 
-    Set<String> createCatalogList(String startDate, String endDate) {
+    public NbpData(String startDate, String endDate){
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    Set<String> createCatalogList() {
         int startYear = Integer.parseInt(startDate.substring(0,4));
         int endYear = Integer.parseInt(endDate.substring(0,4));
 
@@ -29,7 +34,7 @@ class NbpData {
     }
 
 
-    Set<String> createFileList(Set<String> catalogList, String startDate, String endDate) {
+    Set<String> createFileList(Set<String> catalogList) {
         NbpDownloader nbpDownloader = new NbpDownloader();
         Set<String> fileList = nbpDownloader.getFileList(catalogList);
         FileNameFilter fileNameFilter = new FileNameFilter(startDate,endDate);
