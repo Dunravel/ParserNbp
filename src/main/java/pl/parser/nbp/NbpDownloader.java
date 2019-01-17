@@ -5,14 +5,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class NbpDownloader {
     private static final String NBP_URL = "https://www.nbp.pl/kursy/xml/";
     private static final String FILE_NAME_FOOTER = ".xml";
 
-    public List<String> getFileList(List<String> catalogList) {
-        List<String> fileList = new ArrayList<>();
+    public Set<String> getFileList(Set<String> catalogList) {
+        Set<String> fileList = new HashSet<>();
 
         for (String catalogName : catalogList) {
             try {

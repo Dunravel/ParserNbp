@@ -1,5 +1,7 @@
 package pl.parser.nbp;
 
+import pl.parser.nbp.validate.InputCheck;
+
 public class MainClass {
     public static void main(String[] args) {
 

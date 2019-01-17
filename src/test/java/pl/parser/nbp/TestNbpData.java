@@ -3,10 +3,10 @@ package pl.parser.nbp;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.internal.util.collections.Sets;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 public class TestNbpData {
 
@@ -32,9 +32,9 @@ public class TestNbpData {
         String endDate = previousYear + "-01-10";
 
         //when
-        List<String> fileLists = nbpData.createCatalogList(startDate, endDate);
+        Set<String> fileLists = nbpData.createCatalogList(startDate, endDate);
         //then
-        Assert.assertEquals(fileLists, Arrays.asList(CATALOG_NAME_HEADER + previousYear + CATALOG_NAME_FOOTER));
+        Assert.assertEquals(fileLists, Sets.newSet(CATALOG_NAME_HEADER + previousYear + CATALOG_NAME_FOOTER));
     }
 
     @Test
@@ -43,9 +43,9 @@ public class TestNbpData {
         String startDate = previousYear + "-01-01";
         String endDate = currentYear + "-01-01";
         //when
-        List<String> fileLists = nbpData.createCatalogList(startDate, endDate);
+        Set<String> fileLists = nbpData.createCatalogList(startDate, endDate);
         //then
-        Assert.assertEquals(fileLists, Arrays.asList(CATALOG_NAME_HEADER + previousYear + CATALOG_NAME_FOOTER, CURRENT_YEAR_CATALOG_NAME));
+        Assert.assertEquals(fileLists, Sets.newSet(CATALOG_NAME_HEADER + previousYear + CATALOG_NAME_FOOTER, CURRENT_YEAR_CATALOG_NAME));
     }
 
     @Test
@@ -53,14 +53,14 @@ public class TestNbpData {
         //given
         String startDate = "2018-12-31";
         String endDate = "2019-01-03";
-        List<String> catalogList = nbpData.createCatalogList(startDate,endDate);
-        List<String> result = Arrays.asList("c252z181231.xml",
+        Set<String> catalogList = nbpData.createCatalogList(startDate,endDate);
+        Set<String> result = Sets.newSet("c252z181231.xml",
                 "c001z190102.xml",
                 "c002z190103.xml"
                 );
 
         //when
-        List<String> fileList = nbpData.createFileList(catalogList,startDate,endDate);
+        Set<String> fileList = nbpData.createFileList(catalogList,startDate,endDate);
         //then
         Assert.assertEquals(fileList,result);
     }

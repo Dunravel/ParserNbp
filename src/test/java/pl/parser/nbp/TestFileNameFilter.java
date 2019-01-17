@@ -3,8 +3,7 @@ package pl.parser.nbp;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Arrays;
+import org.mockito.internal.util.collections.Sets;
 
 public class TestFileNameFilter {
 
@@ -50,7 +49,7 @@ public class TestFileNameFilter {
         //given
 
         //when
-        fileNameFilter.filter(Arrays.asList("1234.xml"));
+        fileNameFilter.filter(Sets.newSet("1234.xml"));
         //then
     }
 }

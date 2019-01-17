@@ -1,22 +1,23 @@
 package pl.parser.nbp;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 class NbpData {
 
-    private static final String REQUIRED_TABLE_TYPE = "c";
+
     private static final String CATALOG_NAME_HEADER = "dir";
     private static final String CATALOG_NAME_FOOTER = ".txt";
     private static final String CURRENT_YEAR_CATALOG_NAME = "dir.txt";
 
 
-    List<String> createCatalogList(String startDate, String endDate) {
+    Set<String> createCatalogList(String startDate, String endDate) {
         int startYear = Integer.parseInt(startDate.substring(0,4));
         int endYear = Integer.parseInt(endDate.substring(0,4));
 
-        List<String> fileList = new ArrayList<>();
+        Set<String> fileList = new HashSet<>();
 
         for(int year = startYear; year<=endYear; year+=1){
             if(year != LocalDate.now().getYear()) {
@@ -29,10 +30,10 @@ class NbpData {
     }
 
 
-    List<String> createFileList(List<String> catalogList, String startDate, String endDate) {
+    Set<String> createFileList(Set<String> catalogList, String startDate, String endDate) {
         NbpDownloader nbpDownloader = new NbpDownloader();
-        List<String> fileList = nbpDownloader.getFileList(catalogList);
-        FileNameFilter fileNameFilter = new FileNameFilter(REQUIRED_TABLE_TYPE,startDate,endDate);
+        Set<String> fileList = nbpDownloader.getFileList(catalogList);
+        FileNameFilter fileNameFilter = new FileNameFilter(startDate,endDate);
         return fileNameFilter.filter(fileList);
     }
 

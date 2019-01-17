@@ -1,7 +1,9 @@
 package pl.parser.nbp;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 class FileNameFilter {
     private static final String REQUIRED_TABLE_TYPE = "c";
@@ -13,8 +15,8 @@ class FileNameFilter {
         this.endDate = endDate.substring(2,4) + endDate.substring(5,7) + endDate.substring(8,10);
     }
 
-    List<String> filter(List<String> fileList) {
-        List<String> filteredFileList = new ArrayList<>();
+    Set<String> filter(Set<String> fileList) {
+        Set<String> filteredFileList = new HashSet<>();
         for (String fileNameRaw : fileList) {
             String name = getCorrectFileName(fileNameRaw);
             if(name != null) {
