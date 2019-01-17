@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 
 public class TestNbpConnector {
 
@@ -19,7 +20,7 @@ public class TestNbpConnector {
     }
 
 
-    @Test(expected = CurrencyFileNotFound.class)
+    @Test(expected = CurrencyFileNotFoundException.class)
     public void shouldGetCurrencyFileConnectionReturnErrorWhenFileNotFound(){
         //given
         NbpConnector nbpConnector = new NbpConnector();
@@ -27,4 +28,16 @@ public class TestNbpConnector {
         nbpConnector.getCurrencyFileConnection("this-file-does-not-exist");
         //then
     }
+
+    @Test
+    public void shouldGetCurrencyFileConnectionReturnInputStreamWhenFileExists(){
+        //given
+        NbpConnector nbpConnector = new NbpConnector();
+        //when
+        InputStream inputStream = nbpConnector.getCurrencyFileConnection("c023z130201.xml");
+        //then
+        Assert.assertNotNull(inputStream);
+    }
+
+
 }
