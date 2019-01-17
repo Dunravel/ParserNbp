@@ -12,13 +12,11 @@ class NbpData {
     private static final String CATALOG_NAME_FOOTER = ".txt";
     private static final String CURRENT_YEAR_CATALOG_NAME = "dir.txt";
 
-    private String currencyTableType;
     private String startDate;
     private String endDate;
 
 
-    public NbpData(String currencyTableType,String startDate, String endDate){
-        this.currencyTableType = currencyTableType;
+    public NbpData(String startDate, String endDate){
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -45,16 +43,8 @@ class NbpData {
 
         NbpDownloader nbpDownloader = new NbpDownloader();
         Set<String> fileList = nbpDownloader.getFileList(catalogList);
-        FileNameFilter fileNameFilter = new FileNameFilter(currencyTableType,startDate,endDate);
-        return fileNameFilter.filter(fileList);
+
+        return fileList;
     }
 
-
-    public void getFileContent(Set<CurrencyData> currencyDataSet) {
-        CurrencyReader currencyReader = new CurrencyReader();
-        for(CurrencyData currencyData : currencyDataSet){
-            currencyReader.readFile(currencyData);
-        }
-
-    }
 }
