@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class TestFileNameFilter {
 
     private static final String START_DATE = "2018-12-31";
@@ -41,5 +43,14 @@ public class TestFileNameFilter {
         String name = fileNameFilter.getCorrectFileName(INCORRECT_DATE_FILE);
         //then
         Assert.assertNull(name);
+    }
+
+    @Test(expected = NoFilesFoundException.class)
+    public void shouldFilterReturnErrorWhenNoCorrectFilesFound(){
+        //given
+
+        //when
+        fileNameFilter.filter(Arrays.asList("1234.xml"));
+        //then
     }
 }
