@@ -44,9 +44,7 @@ class NbpData {
         Set<String> catalogList = createCatalogList();
 
         NbpDownloader nbpDownloader = new NbpDownloader();
-        Set<String> fileList = nbpDownloader.getFileList(catalogList);
-
-        return fileList;
+        return nbpDownloader.getFileList(catalogList);
     }
 
 
