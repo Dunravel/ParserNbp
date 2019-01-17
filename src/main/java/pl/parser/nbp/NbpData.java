@@ -1,7 +1,6 @@
 package pl.parser.nbp;
 
-import pl.parser.nbp.domain.CurrencyData;
-import pl.parser.nbp.validate.FileNameFilter;
+
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -15,7 +14,6 @@ class NbpData {
     private String startDate;
     private String endDate;
 
-
     public NbpData(String startDate, String endDate){
         this.startDate = startDate;
         this.endDate = endDate;
@@ -24,17 +22,21 @@ class NbpData {
     Set<String> createCatalogList() {
         int startYear = Integer.parseInt(startDate.substring(0,4));
         int endYear = Integer.parseInt(endDate.substring(0,4));
-
         Set<String> fileList = new HashSet<>();
 
         for(int year = startYear; year<=endYear; year+=1){
-            if(year != LocalDate.now().getYear()) {
-                fileList.add(CATALOG_NAME_HEADER + year + CATALOG_NAME_FOOTER);
-            }else{
-                fileList.add(CURRENT_YEAR_CATALOG_NAME);
-            }
+            fileList.add(generateCatalogFileName(year));
+
         }
         return fileList;
+    }
+
+    private String generateCatalogFileName(int year) {
+        if(year != LocalDate.now().getYear()) {
+            return (CATALOG_NAME_HEADER + year + CATALOG_NAME_FOOTER);
+        }else{
+            return (CURRENT_YEAR_CATALOG_NAME);
+        }
     }
 
 
@@ -46,5 +48,7 @@ class NbpData {
 
         return fileList;
     }
+
+
 
 }
