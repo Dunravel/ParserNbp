@@ -8,6 +8,7 @@ public class MainClass {
         InputCheck inputCheck = new InputCheck();
         inputCheck.verify(args);
 
+
         NbpData nbpData = new NbpData();
 
     }
