@@ -9,6 +9,7 @@ public class TestFileNameFilter {
     private static final String START_DATE = "2018-12-31";
     private static final String CORRECT_FILE_NAME = "c252z181231.xml";
     private static final String INCORRECT_TABLE_FILE = "h252z181231.xml";
+    private static final String INCORRECT_DATE_FILE = "c213z181102";
     private FileNameFilter fileNameFilter;
 
     @Before
@@ -29,6 +30,15 @@ public class TestFileNameFilter {
         //given
         //when
         String name = fileNameFilter.getCorrectFileName(INCORRECT_TABLE_FILE);
+        //then
+        Assert.assertNull(name);
+    }
+
+    @Test
+    public void shouldGetCorrectFileNameReturnNullWhenFileOutOfTimePeriod(){
+        //given
+        //when
+        String name = fileNameFilter.getCorrectFileName(INCORRECT_DATE_FILE);
         //then
         Assert.assertNull(name);
     }
