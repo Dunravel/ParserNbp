@@ -1,13 +1,29 @@
 package pl.parser.nbp;
 
+import pl.parser.nbp.domain.CurrencyData;
+
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
 
 public class NbpDownloader {
 
     private static final String FILE_NAME_FOOTER = ".xml";
+
+    public void getCurrencyFiles(Set<CurrencyData> currencyDataSet) {
+        for(CurrencyData currencyData : currencyDataSet){
+            getCurrencyFileContent(new NbpConnector(), currencyData);
+        }
+    }
+
+    public void getCurrencyFileContent(NbpConnector nbpConnector, CurrencyData currencyData) {
+        InputStream in = nbpConnector.getCurrencyFileConnection(currencyData.getFileName());
+        NbpXmlReader nbpXmlReader = new NbpXmlReader(in);
+        nbpXmlReader.getBuySellRate(currencyData);
+
+    }
 
     public Set<String> getFileList(NbpConnector nbpConnector,Set<String> catalogList) {
         Set<String> fileList = new HashSet<>();

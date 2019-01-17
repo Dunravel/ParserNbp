@@ -17,4 +17,14 @@ public class TestNbpConnector {
         //then
         Assert.assertNull(bufferedReader);
     }
+
+
+    @Test(expected = CurrencyFileNotFound.class)
+    public void shouldGetCurrencyFileConnectionReturnErrorWhenFileNotFound(){
+        //given
+        NbpConnector nbpConnector = new NbpConnector();
+        //when
+        nbpConnector.getCurrencyFileConnection("this-file-does-not-exist");
+        //then
+    }
 }

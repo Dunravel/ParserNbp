@@ -2,6 +2,7 @@ package pl.parser.nbp;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 
@@ -25,16 +26,18 @@ public class NbpConnector {
     }
 
     void closeCatalogConnection(){
-
             if(catalogConnection != null) {
                 try {
                     catalogConnection.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             }
 
     }
 
 
+    public InputStream getCurrencyFileConnection(String fileName) {
+        return null;
+    }
 }

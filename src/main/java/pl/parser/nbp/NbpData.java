@@ -1,5 +1,7 @@
 package pl.parser.nbp;
 
+import pl.parser.nbp.domain.CurrencyData;
+
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -42,8 +44,14 @@ class NbpData {
         Set<String> catalogList = createCatalogList();
 
         NbpDownloader nbpDownloader = new NbpDownloader();
-        NbpConnector nbpConnector = new NbpConnector();
-        return nbpDownloader.getFileList(nbpConnector,catalogList);
+        return nbpDownloader.getFileList(new NbpConnector(),catalogList);
     }
 
+
+    public void getFilesContent(Set<CurrencyData> currencyDataSet) {
+        NbpDownloader nbpDownloader = new NbpDownloader();
+        nbpDownloader.getCurrencyFiles(currencyDataSet);
+
+
+    }
 }
