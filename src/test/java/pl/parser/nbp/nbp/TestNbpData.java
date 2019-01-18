@@ -27,27 +27,15 @@ public class TestNbpData {
     public void shouldCreateCatalogListReturnCorrectListOfFilenamesForPreviousYear() {
         //given
         String startDate = previousYear + "-01-01";
-        String endDate = previousYear + "-01-10";
-        NbpData nbpData = new NbpData(startDate,endDate);
-        //when
-        Set<String> fileLists = nbpData.createCatalogList();
-        //then
-        Assert.assertEquals(fileLists, Sets.newSet(CATALOG_NAME_HEADER + previousYear + CATALOG_NAME_FOOTER));
-    }
-
-
-    @Test
-    public void shouldCreateCatalogListReturnCorrectListOfFilenamesForCurrentYear() {
-        //given
-        String startDate = previousYear + "-01-01";
         String endDate = currentYear + "-01-01";
-
         NbpData nbpData = new NbpData(startDate,endDate);
         //when
         Set<String> fileLists = nbpData.createCatalogList();
         //then
-        Assert.assertEquals(fileLists, Sets.newSet(CATALOG_NAME_HEADER + previousYear + CATALOG_NAME_FOOTER, CURRENT_YEAR_CATALOG_NAME));
+        Assert.assertEquals(2,fileLists.size());
+        Assert.assertEquals(Sets.newSet(CATALOG_NAME_HEADER + previousYear + CATALOG_NAME_FOOTER, CURRENT_YEAR_CATALOG_NAME),fileLists );
     }
+
 /*
     @Test
     public void shouldCreateFileListReturnCorrectListOfFilenames(){
