@@ -121,6 +121,16 @@ public class TestNbpXmlReader {
         Assert.assertTrue(isBuyRate);
     }
 
+    @Test
+    public void shouldIsBuyRateReturnFalseWhenIncorrectStartElement(){
+        //given
+        XMLEvent xmlEvent = getStartElement("kurs_sprzedazy");
+        //when
+        boolean isBuyRate = nbpXmlReader.isBuyRate(xmlEvent);
+        //then
+        Assert.assertFalse(isBuyRate);
+    }
+
     private XMLEvent getEventData(String returnedValue) {
         XMLEvent dataEvent = Mockito.mock(XMLEvent.class);
         Characters dataCharacters = Mockito.mock(Characters.class);
