@@ -54,7 +54,7 @@ public class NbpData {
 
 
     public boolean getFilesContent(NbpDownloader nbpDownloader, CurrencyDataSet currencyDataSet) {
-        return nbpDownloader.getCurrencyFiles(currencyDataSet);
+        return nbpDownloader.getCurrencyFiles(new NbpCurrencyFileConnector(), currencyDataSet);
     }
 
 }
