@@ -10,6 +10,6 @@ public class TestIncorrectDateException {
         //when
         String message = new IncorrectDateException().getMessage();
         //then
-        Assert.assertEquals("Provided date is not correct. Correct us date format: Year-Month-Day.\nExample: 2013-12-31",message);
+        Assert.assertEquals("Provided date is not correct. Correct date format: Year-Month-Day.\nExample: 2013-12-31",message);
     }
 }
