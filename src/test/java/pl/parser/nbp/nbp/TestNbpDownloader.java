@@ -90,7 +90,7 @@ public class TestNbpDownloader {
         NbpXmlReader nbpXmlReader = Mockito.mock(NbpXmlReader.class);
         BDDMockito.given(nbpXmlReader.getBuySellRate(ArgumentMatchers.any(),ArgumentMatchers.any())).willReturn(false);
         //when
-        boolean result = nbpDownloader.getCurrencyFiles(nbpXmlReader, currencyDataSet);
+        nbpDownloader.getCurrencyFiles(nbpXmlReader, currencyDataSet);
         //then
     }
 
