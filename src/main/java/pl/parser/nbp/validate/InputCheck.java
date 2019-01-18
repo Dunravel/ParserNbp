@@ -13,24 +13,29 @@ public class InputCheck {
 
 
     public void verify(String[] args) {
-        verifyAmount(args);
-        verifyCurrency(args[0]);
-        areDatesCorrect(args[1],args[2]);
+        try {
+            verifyAmount(args);
+            verifyCurrency(args[0]);
+            areDatesCorrect(args[1],args[2]);
+        }catch (IncorrectAmountOfParametersException | IncorrectDatePeriodException | IncorrectDateException | UnrecognizedCurrencyException e){
+            System.out.println(e.getMessage());
+            System.exit(-1);
+        }
     }
 
-    boolean verifyAmount(String[] args) {
+    boolean verifyAmount(String[] args) throws IncorrectAmountOfParametersException {
         if(args.length != CORRECT_AMOUNT_OF_PARAMETERS)
             throw new IncorrectAmountOfParametersException();
         return true;
     }
 
-    boolean verifyCurrency(String currency) {
+    boolean verifyCurrency(String currency) throws UnrecognizedCurrencyException {
         if(!Currency.exists(currency))
             throw new UnrecognizedCurrencyException();
         return true;
     }
 
-    boolean areDatesCorrect(String startDate, String endDate) {
+    boolean areDatesCorrect(String startDate, String endDate) throws IncorrectDatePeriodException, IncorrectDateException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         simpleDateFormat.setLenient(false);
         try{

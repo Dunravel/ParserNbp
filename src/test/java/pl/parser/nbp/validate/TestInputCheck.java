@@ -22,7 +22,7 @@ public class TestInputCheck {
 
 
     @Test(expected = IncorrectAmountOfParametersException.class)
-    public void shouldReturnErrorWhenIncorrectAmountOfParameters(){
+    public void shouldReturnErrorWhenIncorrectAmountOfParameters() throws IncorrectAmountOfParametersException {
         //given
         String args[] = {"1","2"};
         //when
@@ -35,13 +35,18 @@ public class TestInputCheck {
         //given
         String args[] = {"1","2","3"};
         //when
-        boolean isThree = inputCheck.verifyAmount(args);
+        boolean isThree = false;
+        try {
+            isThree = inputCheck.verifyAmount(args);
+        } catch (IncorrectAmountOfParametersException e) {
+            e.printStackTrace();
+        }
         //then
         Assert.assertTrue(isThree);
     }
 
     @Test
-    public void shouldReturnTrueWhenFirstParameterIsSupportedCurrency(){
+    public void shouldReturnTrueWhenFirstParameterIsSupportedCurrency() throws UnrecognizedCurrencyException {
         //given
         //when
         boolean knownCurrency = inputCheck.verifyCurrency(CORRECT_CURRENCY);
@@ -50,7 +55,7 @@ public class TestInputCheck {
     }
 
     @Test(expected = UnrecognizedCurrencyException.class)
-    public void shouldReturnErrorWhenFirstParameterIsNotSupportedCurrency(){
+    public void shouldReturnErrorWhenFirstParameterIsNotSupportedCurrency() throws UnrecognizedCurrencyException {
         //given
         //when
         inputCheck.verifyCurrency(INCORRECT_CURRENCY);
@@ -58,7 +63,7 @@ public class TestInputCheck {
     }
 
     @Test
-    public void shouldIsDateReturnTrueWhenParametersAreCorrectDates(){
+    public void shouldIsDateReturnTrueWhenParametersAreCorrectDates() throws IncorrectDateException, IncorrectDatePeriodException {
         //given
         //when
         boolean isDate = inputCheck.areDatesCorrect(FIRST_CORRECT_DATE, FIRST_CORRECT_DATE);
@@ -67,21 +72,21 @@ public class TestInputCheck {
     }
 
     @Test(expected = IncorrectDateException.class)
-    public void shouldAreDatesCorrectReturnErrorWhenFirstParameterIsNotDate(){
+    public void shouldAreDatesCorrectReturnErrorWhenFirstParameterIsNotDate() throws IncorrectDateException, IncorrectDatePeriodException {
         //given
         //when
         inputCheck.areDatesCorrect(INCORRECT_DATE, FIRST_CORRECT_DATE);
     }
 
     @Test(expected = IncorrectDateException.class)
-    public void shouldAreDatesCorrectReturnErrorWhenSecondParameterIsNotDate(){
+    public void shouldAreDatesCorrectReturnErrorWhenSecondParameterIsNotDate() throws IncorrectDateException, IncorrectDatePeriodException {
         //given
         //when
         inputCheck.areDatesCorrect(FIRST_CORRECT_DATE, INCORRECT_DATE);
     }
 
     @Test(expected = IncorrectDatePeriodException.class)
-    public void shouldAreDatesCorrectReturnErrorWhenDatePeriodIsNotCorrect(){
+    public void shouldAreDatesCorrectReturnErrorWhenDatePeriodIsNotCorrect() throws IncorrectDateException, IncorrectDatePeriodException {
         //given
         //when
         inputCheck.areDatesCorrect(SECOND_CORRECT_DATE,FIRST_CORRECT_DATE);
@@ -89,11 +94,10 @@ public class TestInputCheck {
     }
 
     @Test(expected = IncorrectDatePeriodException.class)
-    public void shouldAreDatesCorrectReturnErrorWhenYearIsBefore2002(){
+    public void shouldAreDatesCorrectReturnErrorWhenYearIsBefore2002() throws IncorrectDateException, IncorrectDatePeriodException {
         //given
         //when
         inputCheck.areDatesCorrect(OUT_OF_RANGE_DATE,SECOND_CORRECT_DATE);
         //then
     }
-
 }

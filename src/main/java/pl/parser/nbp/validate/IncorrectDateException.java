@@ -1,6 +1,6 @@
 package pl.parser.nbp.validate;
 
-class IncorrectDateException extends RuntimeException{
+class IncorrectDateException extends Exception{
     IncorrectDateException(){
         super("Provided date is not correct. Correct us date format: Year-Month-Day.\nExample: 2013-12-31");
     }
