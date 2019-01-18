@@ -78,8 +78,20 @@ public class TestNbpDownloader {
         BDDMockito.given(nbpXmlReader.getBuySellRate(ArgumentMatchers.any(),ArgumentMatchers.any())).willReturn(true);
         //when
         boolean result = nbpDownloader.getCurrencyFiles(nbpXmlReader, currencyDataSet);
-        //
+        //then
         Assert.assertTrue(result);
+    }
+
+    @Test(expected = FileNotDownloadedException.class)
+    public void shouldGetCurrencyFilesReturnExceptionIfIncorrectData(){
+        //given
+        CurrencyDataSetFactory currencyDataSetFactory = new CurrencyDataSetFactory();
+        CurrencyDataSet currencyDataSet = currencyDataSetFactory.create(Currency.EUR,Sets.newSet("first.xml","second.cml"));
+        NbpXmlReader nbpXmlReader = Mockito.mock(NbpXmlReader.class);
+        BDDMockito.given(nbpXmlReader.getBuySellRate(ArgumentMatchers.any(),ArgumentMatchers.any())).willReturn(false);
+        //when
+        boolean result = nbpDownloader.getCurrencyFiles(nbpXmlReader, currencyDataSet);
+        //then
     }
 
 }
