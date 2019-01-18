@@ -7,10 +7,10 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.mockito.internal.util.collections.Sets;
+import pl.parser.nbp.domain.CurrencyDataSet;
 
 import java.time.LocalDate;
 import java.util.Set;
-import java.util.regex.Matcher;
 
 public class TestNbpData {
 
@@ -66,6 +66,17 @@ public class TestNbpData {
         //then
         Assert.assertEquals(previousYear,startYear);
         Assert.assertEquals(currentYear,endYear);
+    }
+
+    @Test(expected = IncorrectYearParsingException.class)
+    public void shouldGetYearReturnExceptionWhenNotANumberEntered(){
+        //given
+        String startDate = previousYear + "-01-01";
+        String endDate = currentYear + "-01-01";
+
+        NbpData nbpData = new NbpData(startDate,endDate);
+        //when
+        int year = nbpData.getYear("aaaa");
     }
 
 }
