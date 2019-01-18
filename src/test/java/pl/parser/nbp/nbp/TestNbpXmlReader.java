@@ -44,7 +44,7 @@ public class TestNbpXmlReader {
     @Test
     public void shouldIsCurrencyReturnFalseWhenStartElementWithWrongName(){
         //given
-        String matcher = "pozycja";
+        String matcher = "test";
         xmlEventIsStartElementAndHasName(matcher);
         //when
         boolean isCurrency = nbpXmlReader.isCurrency(xmlEvent);
