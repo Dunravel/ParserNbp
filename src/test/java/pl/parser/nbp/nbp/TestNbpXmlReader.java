@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamException;
@@ -109,6 +110,16 @@ public class TestNbpXmlReader {
         Assert.assertFalse(result);
     }
 
+
+    @Test
+    public void shouldIsBuyRateReturnTrueWhenCorrectStartElement(){
+        //given
+        XMLEvent xmlEvent = getStartElement("kurs_kupna");
+        //when
+        boolean isBuyRate = nbpXmlReader.isBuyRate(xmlEvent);
+        //then
+        Assert.assertTrue(isBuyRate);
+    }
 
     private XMLEvent getEventData(String returnedValue) {
         XMLEvent dataEvent = Mockito.mock(XMLEvent.class);
