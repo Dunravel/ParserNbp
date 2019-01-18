@@ -60,13 +60,11 @@ public class TestNbpXmlReader {
         //given
         String value = "test";
         XMLEventReader eventReader = Mockito.mock(XMLEventReader.class);
-        XMLEvent xmlEvent = Mockito.mock(XMLEvent.class);
 
+        XMLEvent xmlEvent = getEventData(value);
         BDDMockito.given(eventReader.hasNext()).willReturn(true);
         BDDMockito.given(eventReader.nextEvent()).willReturn(xmlEvent);
-        Characters characters = Mockito.mock(Characters.class);
-        BDDMockito.given(xmlEvent.asCharacters()).willReturn(characters);
-        BDDMockito.given(characters.getData()).willReturn(value);
+
         //when
         String result = nbpXmlReader.getValue(eventReader);
         //then
@@ -78,7 +76,6 @@ public class TestNbpXmlReader {
         //given
         XMLEventReader xmlEventReader = Mockito.mock(XMLEventReader.class);
         BDDMockito.when(xmlEventReader.hasNext()).thenReturn(true,true,false);
-
 
         String currencyCode = "kod_waluty";
         XMLEvent currencyEvent = getStartElement(currencyCode);
@@ -93,11 +90,11 @@ public class TestNbpXmlReader {
         Assert.assertTrue(result);
     }
 
-    private XMLEvent getEventData(String currencyValue) {
+    private XMLEvent getEventData(String returnedValue) {
         XMLEvent dataEvent = Mockito.mock(XMLEvent.class);
         Characters dataCharacters = Mockito.mock(Characters.class);
         BDDMockito.given(dataEvent.asCharacters()).willReturn(dataCharacters);
-        BDDMockito.given(dataCharacters.getData()).willReturn(currencyValue);
+        BDDMockito.given(dataCharacters.getData()).willReturn(returnedValue);
         return dataEvent;
     }
 
