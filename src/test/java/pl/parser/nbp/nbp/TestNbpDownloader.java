@@ -3,14 +3,13 @@ package pl.parser.nbp.nbp;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatcher;
 import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.mockito.internal.util.collections.Sets;
+import pl.parser.nbp.domain.CurrencyData;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -54,5 +53,18 @@ public class TestNbpDownloader {
         Assert.assertEquals(3, result.size());
         Assert.assertEquals(Sets.newSet("first.xml","second.xml","third.xml"),result);
     }
+
+    @Test
+    public void shouldGetCurrencyFileContent(){
+        //given
+        CurrencyData currencyData = Mockito.mock(CurrencyData.class);
+        NbpXmlReader nbpXmlReader = Mockito.mock(NbpXmlReader.class);
+        BDDMockito.given(nbpXmlReader.getBuySellRate(ArgumentMatchers.any(),ArgumentMatchers.any())).willReturn(true);
+        //when
+        boolean result = nbpDownloader.getCurrencyFileContent(nbpXmlReader,currencyData);
+        //then
+        Assert.assertTrue(result);
+    }
+
 
 }
