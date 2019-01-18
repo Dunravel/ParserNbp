@@ -16,16 +16,12 @@ import javax.xml.stream.events.XMLEvent;
 public class TestNbpXmlReader {
 
     private NbpXmlReader nbpXmlReader;
-    private XMLEventReader eventReader;
     private XMLEvent xmlEvent;
 
     @Before
-    public void setUp() throws XMLStreamException {
+    public void setUp() {
         nbpXmlReader = new NbpXmlReader();
-        eventReader = Mockito.mock(XMLEventReader.class);
-        BDDMockito.given(eventReader.hasNext()).willReturn(true);
         xmlEvent = Mockito.mock(XMLEvent.class);
-        BDDMockito.given(eventReader.nextEvent()).willReturn(xmlEvent);
     }
     @Test
     public void shouldIsCurrencyReturnTrueWhenRequestedCurrency(){
@@ -62,16 +58,49 @@ public class TestNbpXmlReader {
     @Test
     public void shouldGetValueReturnString() throws XMLStreamException {
         //given
+        String value = "test";
+        XMLEventReader eventReader = Mockito.mock(XMLEventReader.class);
+        XMLEvent xmlEvent = Mockito.mock(XMLEvent.class);
+
+        BDDMockito.given(eventReader.hasNext()).willReturn(true);
+        BDDMockito.given(eventReader.nextEvent()).willReturn(xmlEvent);
         Characters characters = Mockito.mock(Characters.class);
         BDDMockito.given(xmlEvent.asCharacters()).willReturn(characters);
-        BDDMockito.given(characters.getData()).willReturn("test");
+        BDDMockito.given(characters.getData()).willReturn(value);
         //when
         String result = nbpXmlReader.getValue(eventReader);
         //then
         Assert.assertEquals("test",result);
     }
 
+    @Test
+    public void shouldFindCurrencyReturnTrueIfCorrectCurrency() throws XMLStreamException {
+        //given
+        XMLEventReader xmlEventReader = Mockito.mock(XMLEventReader.class);
+        BDDMockito.when(xmlEventReader.hasNext()).thenReturn(true,true,false);
 
+        XMLEvent currencyEvent = Mockito.mock(XMLEvent.class);
+        StartElement startElement = Mockito.mock(StartElement.class);
+        QName qName = Mockito.mock(QName.class);
+        BDDMockito.given(currencyEvent.isStartElement()).willReturn(true);
+        BDDMockito.given(currencyEvent.asStartElement()).willReturn(startElement);
+        BDDMockito.given(startElement.getName()).willReturn(qName);
+        BDDMockito.given(qName.getLocalPart()).willReturn("kod_waluty");
+
+
+        XMLEvent dataEvent = Mockito.mock(XMLEvent.class);
+        Characters dataCharacters = Mockito.mock(Characters.class);
+        BDDMockito.given(dataEvent.asCharacters()).willReturn(dataCharacters);
+        BDDMockito.given(dataCharacters.getData()).willReturn("EUR");
+
+
+        BDDMockito.when(xmlEventReader.nextEvent()).thenReturn(currencyEvent,dataEvent);
+
+        //when
+        boolean result = nbpXmlReader.findCurrency("EUR", xmlEventReader);
+        //then
+        Assert.assertTrue(result);
+    }
 
 
     private void xmlEventIsStartElementAndHasName(String matcher) {
@@ -81,7 +110,6 @@ public class TestNbpXmlReader {
         BDDMockito.given(xmlEvent.asStartElement()).willReturn(startElement);
         BDDMockito.given(startElement.getName()).willReturn(qName);
         BDDMockito.given(qName.getLocalPart()).willReturn(matcher);
-        startElement.getName().getLocalPart();
     }
 
     private void xmlEventIsNotStartElement() {

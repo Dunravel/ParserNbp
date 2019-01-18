@@ -39,7 +39,7 @@ public class NbpXmlReader {
         return true;
     }
 
-    private double getSellRate(XMLEventReader eventReader) throws XMLStreamException {
+    double getSellRate(XMLEventReader eventReader) throws XMLStreamException {
         while(eventReader.hasNext()){
             XMLEvent event = eventReader.nextEvent();
             if(isSellRate(event)){
@@ -51,7 +51,7 @@ public class NbpXmlReader {
         return 0;
     }
 
-    private boolean isSellRate(XMLEvent event) {
+    boolean isSellRate(XMLEvent event) {
         if(event.isStartElement()) {
             StartElement startElement = event.asStartElement();
             return startElement.getName().getLocalPart().equals(CURRENCY_SELL_RATE);
@@ -59,7 +59,7 @@ public class NbpXmlReader {
         return false;
     }
 
-    private double getBuyRate(XMLEventReader eventReader) throws XMLStreamException {
+    double getBuyRate(XMLEventReader eventReader) throws XMLStreamException {
         while(eventReader.hasNext()){
             XMLEvent event = eventReader.nextEvent();
             if(isBuyRate(event)){
@@ -71,7 +71,7 @@ public class NbpXmlReader {
         return 0;
     }
 
-    private boolean isBuyRate(XMLEvent event) {
+    boolean isBuyRate(XMLEvent event) {
         if(event.isStartElement()) {
             StartElement startElement = event.asStartElement();
             return startElement.getName().getLocalPart().equals(CURRENCY_BUY_RATE);
@@ -79,7 +79,7 @@ public class NbpXmlReader {
         return false;
     }
 
-    private boolean findCurrency(String requestedCurrency, XMLEventReader eventReader) throws XMLStreamException {
+    boolean findCurrency(String requestedCurrency, XMLEventReader eventReader) throws XMLStreamException {
         while(eventReader.hasNext()){
             XMLEvent event = eventReader.nextEvent();
             if(isCurrency(event)){
