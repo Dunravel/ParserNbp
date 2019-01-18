@@ -42,10 +42,8 @@ public class NbpData {
         }
     }
 
-
-    public Set<String> createFileList() {
+    public Set<String>  createFileList(NbpDownloader nbpDownloader) {
         Set<String> catalogList = createCatalogList();
-        NbpDownloader nbpDownloader = new NbpDownloader();
         return nbpDownloader.getFileList(catalogList);
     }
 
@@ -53,7 +51,6 @@ public class NbpData {
     public void getFilesContent(CurrencyDataSet currencyDataSet) {
         NbpDownloader nbpDownloader = new NbpDownloader();
         nbpDownloader.getCurrencyFiles(currencyDataSet);
-
-
     }
+
 }

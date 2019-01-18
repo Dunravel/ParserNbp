@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
-class NbpDownloader {
+public class NbpDownloader {
 
     private static final String FILE_NAME_FOOTER = ".xml";
 

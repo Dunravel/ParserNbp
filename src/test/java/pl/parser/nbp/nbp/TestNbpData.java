@@ -3,10 +3,14 @@ package pl.parser.nbp.nbp;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
+import org.mockito.BDDMockito;
+import org.mockito.Mockito;
 import org.mockito.internal.util.collections.Sets;
 
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.regex.Matcher;
 
 public class TestNbpData {
 
@@ -36,24 +40,19 @@ public class TestNbpData {
         Assert.assertEquals(Sets.newSet(CATALOG_NAME_HEADER + previousYear + CATALOG_NAME_FOOTER, CURRENT_YEAR_CATALOG_NAME),fileLists );
     }
 
-/*
     @Test
-    public void shouldCreateFileListReturnCorrectListOfFilenames(){
+    public void shouldCreateFileListReturnFileList(){
         //given
-        String startDate = "2018-12-31";
-        String endDate = "2019-01-03";
+        String startDate = previousYear + "-01-01";
+        String endDate = currentYear + "-01-01";
         NbpData nbpData = new NbpData(startDate,endDate);
-        Set<String> catalogList = nbpData.createCatalogList();
-        Set<String> result = Sets.newSet("c252z181231.xml",
-                "c001z190102.xml",
-                "c002z190103.xml"
-                );
-
+        NbpDownloader nbpDownloader = Mockito.mock(NbpDownloader.class);
+        BDDMockito.given(nbpDownloader.getFileList(ArgumentMatchers.anySet())).willReturn(Sets.newSet("file.xml"));
         //when
-        Set<String> fileList = nbpData.createFileList();
+        Set<String> result = nbpData.createFileList(nbpDownloader);
         //then
-        Assert.assertEquals(fileList,result);
+        Assert.assertEquals(Sets.newSet("file.xml"),result);
     }
-*/
+
 
 }

@@ -2,6 +2,7 @@ package pl.parser.nbp;
 
 import pl.parser.nbp.domain.*;
 import pl.parser.nbp.nbp.NbpData;
+import pl.parser.nbp.nbp.NbpDownloader;
 import pl.parser.nbp.validate.FileNameFilter;
 import pl.parser.nbp.validate.InputCheck;
 
@@ -11,7 +12,7 @@ class Handler {
         InputData inputData = getInputData(args);
 
         NbpData nbpData = new NbpData(inputData.getStartDate(),inputData.getEndDate());
-        FileList fileList = new FileList(nbpData.createFileList());
+        FileList fileList = new FileList(nbpData.createFileList(new NbpDownloader()));
 
         filterFileList(inputData, fileList);
 
