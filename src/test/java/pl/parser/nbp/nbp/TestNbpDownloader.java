@@ -55,7 +55,7 @@ public class TestNbpDownloader {
     }
 
     @Test
-    public void shouldGetCurrencyFileContent(){
+    public void shouldGetCurrencyFileContentReturnTrueForCorrectConenction(){
         //given
         CurrencyData currencyData = Mockito.mock(CurrencyData.class);
         NbpXmlReader nbpXmlReader = Mockito.mock(NbpXmlReader.class);
@@ -65,6 +65,5 @@ public class TestNbpDownloader {
         //then
         Assert.assertTrue(result);
     }
-
 
 }
