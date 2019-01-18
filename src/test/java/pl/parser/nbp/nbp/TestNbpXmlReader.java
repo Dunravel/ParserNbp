@@ -26,9 +26,9 @@ public class TestNbpXmlReader {
         BDDMockito.given(qName.getLocalPart()).willReturn(matcher);
         startElement.getName().getLocalPart();
         //when
-        boolean isCurrecy = nbpXmlReader.isCurrency(xmlEvent);
+        boolean isCurrency = nbpXmlReader.isCurrency(xmlEvent);
         //then
-        Assert.assertTrue(isCurrecy);
+        Assert.assertTrue(isCurrency);
 
     }
 }
