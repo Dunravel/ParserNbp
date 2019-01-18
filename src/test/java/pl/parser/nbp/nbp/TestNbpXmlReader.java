@@ -41,6 +41,16 @@ public class TestNbpXmlReader {
         Assert.assertFalse(isCurrency);
     }
 
+    @Test
+    public void shouldIsCurrencyReturnFalseWhenStartElementWithWrongName(){
+        //given
+        String matcher = "pozycja";
+        xmlEventIsStartElementAndHasName(matcher);
+        //when
+        boolean isCurrency = nbpXmlReader.isCurrency(xmlEvent);
+        //then
+        Assert.assertFalse(isCurrency);
+    }
 
     private void xmlEventIsStartElementAndHasName(String matcher) {
         StartElement startElement = Mockito.mock(StartElement.class);
