@@ -24,4 +24,13 @@ public class TestCurrency {
         //then
         Assert.assertFalse(result);
     }
+
+    @Test
+    public void shouldListAllReturnAllCurrencyNames(){
+        //given
+        //when
+        String result = Currency.listAll();
+        //then
+        Assert.assertEquals(" USD EUR CHF GBP",result);
+    }
 }

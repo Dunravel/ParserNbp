@@ -16,11 +16,7 @@ public enum Currency {
     }
 
     public static String listAll(){
-        StringBuilder list = new StringBuilder();
-        for(Currency currency : values()){
-            list.append(" ");
-            list.append(currency.toString());
-        }
-        return list.toString();
+        return "";
+
     }
 }
