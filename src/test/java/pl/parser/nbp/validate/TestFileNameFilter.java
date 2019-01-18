@@ -12,7 +12,7 @@ public class TestFileNameFilter {
     private static final String CORRECT_FILE_NAME = "c252z181231.xml";
     private static final String INCORRECT_TABLE_FILE = "h252z181231.xml";
     private static final String INCORRECT_DATE_FILE = "c213z181102";
-    public static final String CURRENCY_TABLE_TYPE = "c";
+    private static final String CURRENCY_TABLE_TYPE = "c";
     private FileNameFilter fileNameFilter;
 
     @Before
