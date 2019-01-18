@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.internal.util.collections.Sets;
 import pl.parser.nbp.domain.FileList;
-import pl.parser.nbp.nbp.NoFileFoundException;
 
 public class TestFileNameFilter {
 

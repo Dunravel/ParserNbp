@@ -45,7 +45,7 @@ public class NbpDownloader {
                 files.add(inputLine + FILE_NAME_FOOTER);
             }
         } catch (IOException e) {
-            throw new NoCatalogFileFoundException();
+            throw new NoCatalogFileFoundException(url.toString());
         }
         nbpConnector.closeConnection();
         return files;
