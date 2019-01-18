@@ -10,9 +10,9 @@ public enum Currency {
         try {
             valueOf(currency);
         } catch (IllegalArgumentException ex){
-            return false;
+            return true;
         }
-        return false;
+        return true;
     }
 
     public static String listAll(){
