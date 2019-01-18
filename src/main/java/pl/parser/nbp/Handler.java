@@ -18,15 +18,13 @@ class Handler {
         CurrencyDataSet currencyDataSet = getCurrencyDataSet(inputData, fileList);
         nbpData.getFilesContent(currencyDataSet);
 
-        CurrencyCalculation currencyCalculation = new CurrencyCalculation(currencyDataSet);
-
-        displayResults(currencyCalculation);
+        displayResults(currencyDataSet);
     }
 
-    void displayResults(CurrencyCalculation currencyCalculation) {
+    void displayResults(CurrencyDataSet currencyDataSet) {
         Displayer displayer = new Displayer();
-        displayer.displayDoubleToScreen(currencyCalculation.getAverageBuyRate());
-        displayer.displayDoubleToScreen(currencyCalculation.getDeviationSellRate());
+        displayer.displayDoubleToScreen(currencyDataSet.getAverageBuyRate());
+        displayer.displayDoubleToScreen(currencyDataSet.getDeviationSellRate());
     }
 
     CurrencyDataSet getCurrencyDataSet(InputData inputData, FileList fileList) {
