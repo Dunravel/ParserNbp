@@ -54,5 +54,18 @@ public class TestNbpData {
         Assert.assertEquals(Sets.newSet("file.xml"),result);
     }
 
+    @Test
+    public void shouldGetYearReturnCorrectYear(){
+        //given
+        String startDate = previousYear + "-01-01";
+        String endDate = currentYear + "-01-01";
+        NbpData nbpData = new NbpData(startDate,endDate);
+        //when
+        int startYear = nbpData.getYear(startDate);
+        int endYear = nbpData.getYear(endDate);
+        //then
+        Assert.assertEquals(previousYear,startYear);
+        Assert.assertEquals(currentYear,endYear);
+    }
 
 }
