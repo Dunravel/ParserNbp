@@ -10,8 +10,8 @@ public class TestFileNotDownloadedException {
         //given
         String fileName = "test.xml";
         //when
-        String message = new FileNotDownloadedException().getMessage();
+        String message = new FileNotDownloadedException(fileName).getMessage();
         //then
-        Assert.assertEquals("File not downloaded: test.xml",message);
+        Assert.assertEquals("File download not successful: test.xml",message);
     }
 }

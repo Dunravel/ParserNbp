@@ -78,7 +78,7 @@ public class TestNbpData {
     public void shouldGetFilesContentReturnFileList(){
         //given
         CurrencyDataSet currencyDataSet = Mockito.mock(CurrencyDataSet.class);
-        BDDMockito.given(nbpDownloader.getCurrencyFiles(ArgumentMatchers.any(NbpConnector.class),ArgumentMatchers.any(CurrencyDataSet.class))).willReturn(true);
+        BDDMockito.given(nbpDownloader.getCurrencyFiles(ArgumentMatchers.any(),ArgumentMatchers.any(CurrencyDataSet.class))).willReturn(true);
         //when
         boolean result = nbpData.getFilesContent(nbpDownloader, currencyDataSet);
         //then
