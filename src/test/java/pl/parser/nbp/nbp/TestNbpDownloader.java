@@ -23,6 +23,9 @@ public class TestNbpDownloader {
     private NbpCatalogConnector nbpCatalogConnector;
     private BufferedReader reader1;
     private BufferedReader reader2;
+    private CurrencyDataSetFactory currencyDataSetFactory;
+    private CurrencyDataSet currencyDataSet;
+    private NbpXmlReader nbpXmlReader;
 
     @Before
     public void setUp(){
@@ -30,6 +33,10 @@ public class TestNbpDownloader {
         nbpCatalogConnector = Mockito.mock(NbpCatalogConnector.class);
         reader1 = new BufferedReader(new StringReader("first\nsecond\nthird"));
         reader2 = new BufferedReader(new StringReader("fourth\nfifth\nsixth"));
+
+
+        currencyDataSet = new CurrencyDataSetFactory().create(Currency.EUR, Sets.newSet("first.xml","second.cml"));
+        nbpXmlReader = Mockito.mock(NbpXmlReader.class);
     }
 
     @Test
@@ -72,9 +79,6 @@ public class TestNbpDownloader {
     @Test
     public void shouldGetCurrencyFilesReturnTrueForCorrectData(){
         //given
-        CurrencyDataSetFactory currencyDataSetFactory = new CurrencyDataSetFactory();
-        CurrencyDataSet currencyDataSet = currencyDataSetFactory.create(Currency.EUR,Sets.newSet("first.xml","second.cml"));
-        NbpXmlReader nbpXmlReader = Mockito.mock(NbpXmlReader.class);
         BDDMockito.given(nbpXmlReader.getBuySellRate(ArgumentMatchers.any(),ArgumentMatchers.any())).willReturn(true);
         //when
         boolean result = nbpDownloader.getCurrencyFiles(nbpXmlReader, currencyDataSet);
@@ -85,9 +89,6 @@ public class TestNbpDownloader {
     @Test(expected = FileNotDownloadedException.class)
     public void shouldGetCurrencyFilesReturnExceptionIfIncorrectData(){
         //given
-        CurrencyDataSetFactory currencyDataSetFactory = new CurrencyDataSetFactory();
-        CurrencyDataSet currencyDataSet = currencyDataSetFactory.create(Currency.EUR,Sets.newSet("first.xml","second.cml"));
-        NbpXmlReader nbpXmlReader = Mockito.mock(NbpXmlReader.class);
         BDDMockito.given(nbpXmlReader.getBuySellRate(ArgumentMatchers.any(),ArgumentMatchers.any())).willReturn(false);
         //when
         nbpDownloader.getCurrencyFiles(nbpXmlReader, currencyDataSet);
