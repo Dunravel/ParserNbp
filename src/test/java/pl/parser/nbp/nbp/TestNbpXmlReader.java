@@ -90,6 +90,26 @@ public class TestNbpXmlReader {
         Assert.assertTrue(result);
     }
 
+    @Test
+    public void shouldFindCurrencyReturnTrueFalseIfCurrencyNotFound() throws XMLStreamException {
+        //given
+        XMLEventReader xmlEventReader = Mockito.mock(XMLEventReader.class);
+        BDDMockito.when(xmlEventReader.hasNext()).thenReturn(true,true,false);
+
+        String currencyCode = "kod_waluty";
+        XMLEvent currencyEvent = getStartElement(currencyCode);
+        String currencyValue = "USD";
+        XMLEvent dataEvent = getEventData(currencyValue);
+
+        BDDMockito.when(xmlEventReader.nextEvent()).thenReturn(currencyEvent,dataEvent);
+
+        //when
+        boolean result = nbpXmlReader.findCurrency("EUR", xmlEventReader);
+        //then
+        Assert.assertFalse(result);
+    }
+
+
     private XMLEvent getEventData(String returnedValue) {
         XMLEvent dataEvent = Mockito.mock(XMLEvent.class);
         Characters dataCharacters = Mockito.mock(Characters.class);
