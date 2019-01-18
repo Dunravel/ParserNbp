@@ -22,17 +22,16 @@ public class NbpXmlReader {
     public void getBuySellRate(CurrencyData currencyData) {
         double buyRate = 0;
         double sellRate = 0;
+
         try {
             XMLInputFactory inputFactory = XMLInputFactory.newInstance();
             XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
 
-            boolean currency = findCurrency(currencyData.getCurrency().toString(), eventReader);
-            if(currency){
+            if(findCurrency(currencyData.getCurrency().toString(), eventReader)){
                 buyRate = getBuyRate(eventReader);
                 if(buyRate > 0) {
                     sellRate = getSellRate(eventReader);
                 }
-
             }
         } catch (XMLStreamException e) {
             e.printStackTrace();

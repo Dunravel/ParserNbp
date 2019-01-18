@@ -17,13 +17,10 @@ public class TestNbpDownloader {
         nbpDownloader = new NbpDownloader();
     }
 
-
-
     @Test
     public void shouldGetFileListReturnCompleteListForCatalog(){
         //given
         Set<String> catalogList = Sets.newSet(CATALOG_NAME_2018);
-
         //when
         Set<String> result = nbpDownloader.getFileList(catalogList);
         //then

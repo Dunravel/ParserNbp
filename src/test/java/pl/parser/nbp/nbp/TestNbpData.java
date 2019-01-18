@@ -19,12 +19,9 @@ public class TestNbpData {
 
     @Before
     public void setUp() {
-
         currentYear = LocalDate.now().getYear();
         previousYear = currentYear - 1;
     }
-
-
 
     @Test
     public void shouldCreateCatalogListReturnCorrectListOfFilenamesForPreviousYear() {
@@ -50,7 +47,7 @@ public class TestNbpData {
         //then
         Assert.assertEquals(fileLists, Sets.newSet(CATALOG_NAME_HEADER + previousYear + CATALOG_NAME_FOOTER, CURRENT_YEAR_CATALOG_NAME));
     }
-
+/*
     @Test
     public void shouldCreateFileListReturnCorrectListOfFilenames(){
         //given
@@ -68,6 +65,6 @@ public class TestNbpData {
         //then
         Assert.assertEquals(fileList,result);
     }
-
+*/
 
 }
