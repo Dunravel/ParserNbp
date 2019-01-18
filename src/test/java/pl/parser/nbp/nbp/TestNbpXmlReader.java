@@ -1,6 +1,7 @@
 package pl.parser.nbp.nbp;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
@@ -11,20 +12,19 @@ import javax.xml.stream.events.XMLEvent;
 
 public class TestNbpXmlReader {
 
+    private NbpXmlReader nbpXmlReader;
+    private XMLEvent xmlEvent;
+
+    @Before
+    public void setUp(){
+        nbpXmlReader = new NbpXmlReader();
+        xmlEvent = Mockito.mock(XMLEvent.class);
+    }
     @Test
     public void shouldIsCurrencyReturnTrueWhenRequestedCurrency(){
         //given
-        String requestedCurrency = "EUR";
-        NbpXmlReader nbpXmlReader = new NbpXmlReader();
-        XMLEvent xmlEvent = Mockito.mock(XMLEvent.class);
-        StartElement startElement = Mockito.mock(StartElement.class);
-        QName qName = Mockito.mock(QName.class);
         String matcher = "kod_waluty";
-        BDDMockito.given(xmlEvent.isStartElement()).willReturn(true);
-        BDDMockito.given(xmlEvent.asStartElement()).willReturn(startElement);
-        BDDMockito.given(startElement.getName()).willReturn(qName);
-        BDDMockito.given(qName.getLocalPart()).willReturn(matcher);
-        startElement.getName().getLocalPart();
+        xmlEventIsStartElementAndHasName(matcher);
         //when
         boolean isCurrency = nbpXmlReader.isCurrency(xmlEvent);
         //then
@@ -34,12 +34,25 @@ public class TestNbpXmlReader {
     @Test
     public void shouldIsCurrencyReturnFalseWhenNotStartElement(){
         //given
-        NbpXmlReader nbpXmlReader = new NbpXmlReader();
-        XMLEvent xmlEvent = Mockito.mock(XMLEvent.class);
-        BDDMockito.given(xmlEvent.isStartElement()).willReturn(false);
+        xmlEventIsNotStartElement();
         //when
         boolean isCurrency = nbpXmlReader.isCurrency(xmlEvent);
         //then
         Assert.assertFalse(isCurrency);
+    }
+
+
+    private void xmlEventIsStartElementAndHasName(String matcher) {
+        StartElement startElement = Mockito.mock(StartElement.class);
+        QName qName = Mockito.mock(QName.class);
+        BDDMockito.given(xmlEvent.isStartElement()).willReturn(true);
+        BDDMockito.given(xmlEvent.asStartElement()).willReturn(startElement);
+        BDDMockito.given(startElement.getName()).willReturn(qName);
+        BDDMockito.given(qName.getLocalPart()).willReturn(matcher);
+        startElement.getName().getLocalPart();
+    }
+
+    private void xmlEventIsNotStartElement() {
+        BDDMockito.given(xmlEvent.isStartElement()).willReturn(false);
     }
 }
