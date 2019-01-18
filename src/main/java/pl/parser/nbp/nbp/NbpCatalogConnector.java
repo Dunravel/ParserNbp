@@ -15,7 +15,7 @@ public class NbpCatalogConnector implements NbpConnector{
             reader = new BufferedReader(
                     new InputStreamReader(catalogFile.openStream()));
         } catch (IOException e) {
-            throw new NoFileFoundException();
+            throw new NoCatalogFileFoundException(catalogFile.toString());
         }
         return reader;
     }

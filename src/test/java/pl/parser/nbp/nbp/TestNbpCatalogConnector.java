@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 
 public class TestNbpCatalogConnector {
 
-    @Test(expected = NoFileFoundException.class)
+    @Test(expected = NoCatalogFileFoundException.class)
     public void shouldConnectToCatalogReturnErrorWhenFileNotFound(){
         //given
         NbpConnector nbpConnector = new NbpCatalogConnector();

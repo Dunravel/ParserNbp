@@ -13,7 +13,7 @@ public class NbpCurrencyFileConnector implements NbpConnector{
         try {
             in = url.openStream(); //new FileInputStream(NBP_URL + currencyData.getFileName());
         } catch (IOException e) {
-            throw new CurrencyFileNotFoundException();
+            throw new CurrencyFileNotFoundException(url.toString());
         }
         return in;
     }
