@@ -49,7 +49,7 @@ public class TestInputCheck {
         Assert.assertTrue(knownCurrency);
     }
 
-    @Test(expected = UnrecognizedCurrency.class)
+    @Test(expected = UnrecognizedCurrencyException.class)
     public void shouldReturnErrorWhenFirstParameterIsNotSupportedCurrency(){
         //given
         //when
