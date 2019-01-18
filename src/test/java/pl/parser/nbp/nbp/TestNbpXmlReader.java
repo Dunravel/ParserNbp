@@ -166,7 +166,21 @@ public class TestNbpXmlReader {
         Assert.assertEquals(1.0,buyRate,0.1);
     }
 
+    @Test
+    public void shouldGetSellRateReturnRateWhenBuyRateFound() throws XMLStreamException {
+        //given
+        XMLEventReader xmlEventReader = Mockito.mock(XMLEventReader.class);
+        BDDMockito.when(xmlEventReader.hasNext()).thenReturn(true,true,false);
 
+        XMLEvent sellEvent = getStartElement("kurs_sprzedazy");
+        XMLEvent dataEvent = getDataEvent("1,0");
+
+        BDDMockito.when(xmlEventReader.nextEvent()).thenReturn(sellEvent,dataEvent);
+        //when
+        double buyRate = nbpXmlReader.getSellRate(xmlEventReader);
+        //then
+        Assert.assertEquals(1.0,buyRate,0.1);
+    }
 
 
     private XMLEvent getDataEvent(String returnedValue) {
