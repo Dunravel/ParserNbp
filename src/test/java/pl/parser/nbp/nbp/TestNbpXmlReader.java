@@ -29,6 +29,17 @@ public class TestNbpXmlReader {
         boolean isCurrency = nbpXmlReader.isCurrency(xmlEvent);
         //then
         Assert.assertTrue(isCurrency);
+    }
 
+    @Test
+    public void shouldIsCurrencyReturnFalseWhenNotStartElement(){
+        //given
+        NbpXmlReader nbpXmlReader = new NbpXmlReader();
+        XMLEvent xmlEvent = Mockito.mock(XMLEvent.class);
+        BDDMockito.given(xmlEvent.isStartElement()).willReturn(false);
+        //when
+        boolean isCurrency = nbpXmlReader.isCurrency(xmlEvent);
+        //then
+        Assert.assertFalse(isCurrency);
     }
 }
