@@ -20,15 +20,18 @@ public class NbpData {
     }
 
     Set<String> createCatalogList() {
-        int startYear = Integer.parseInt(startDate.substring(0,4));
-        int endYear = Integer.parseInt(endDate.substring(0,4));
+        int startYear = getYear(startDate);
+        int endYear = getYear(endDate);
         Set<String> fileList = new HashSet<>();
 
         for(int year = startYear; year<=endYear; year+=1){
             fileList.add(generateCatalogFileName(year));
-
         }
         return fileList;
+    }
+
+    private int getYear(String startDate) {
+        return Integer.parseInt(startDate.substring(0, 4));
     }
 
     String generateCatalogFileName(int year) {
