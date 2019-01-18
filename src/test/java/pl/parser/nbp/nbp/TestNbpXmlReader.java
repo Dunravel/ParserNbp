@@ -79,20 +79,11 @@ public class TestNbpXmlReader {
         XMLEventReader xmlEventReader = Mockito.mock(XMLEventReader.class);
         BDDMockito.when(xmlEventReader.hasNext()).thenReturn(true,true,false);
 
-        XMLEvent currencyEvent = Mockito.mock(XMLEvent.class);
-        StartElement startElement = Mockito.mock(StartElement.class);
-        QName qName = Mockito.mock(QName.class);
-        BDDMockito.given(currencyEvent.isStartElement()).willReturn(true);
-        BDDMockito.given(currencyEvent.asStartElement()).willReturn(startElement);
-        BDDMockito.given(startElement.getName()).willReturn(qName);
-        BDDMockito.given(qName.getLocalPart()).willReturn("kod_waluty");
 
-
-        XMLEvent dataEvent = Mockito.mock(XMLEvent.class);
-        Characters dataCharacters = Mockito.mock(Characters.class);
-        BDDMockito.given(dataEvent.asCharacters()).willReturn(dataCharacters);
-        BDDMockito.given(dataCharacters.getData()).willReturn("EUR");
-
+        String currencyCode = "kod_waluty";
+        XMLEvent currencyEvent = getStartElement(currencyCode);
+        String currencyValue = "EUR";
+        XMLEvent dataEvent = getEventData(currencyValue);
 
         BDDMockito.when(xmlEventReader.nextEvent()).thenReturn(currencyEvent,dataEvent);
 
@@ -100,6 +91,25 @@ public class TestNbpXmlReader {
         boolean result = nbpXmlReader.findCurrency("EUR", xmlEventReader);
         //then
         Assert.assertTrue(result);
+    }
+
+    private XMLEvent getEventData(String currencyValue) {
+        XMLEvent dataEvent = Mockito.mock(XMLEvent.class);
+        Characters dataCharacters = Mockito.mock(Characters.class);
+        BDDMockito.given(dataEvent.asCharacters()).willReturn(dataCharacters);
+        BDDMockito.given(dataCharacters.getData()).willReturn(currencyValue);
+        return dataEvent;
+    }
+
+    private XMLEvent getStartElement(String currencyCode) {
+        XMLEvent currencyEvent = Mockito.mock(XMLEvent.class);
+        StartElement startElement = Mockito.mock(StartElement.class);
+        QName qName = Mockito.mock(QName.class);
+        BDDMockito.given(currencyEvent.isStartElement()).willReturn(true);
+        BDDMockito.given(currencyEvent.asStartElement()).willReturn(startElement);
+        BDDMockito.given(startElement.getName()).willReturn(qName);
+        BDDMockito.given(qName.getLocalPart()).willReturn(currencyCode);
+        return currencyEvent;
     }
 
 
