@@ -10,8 +10,7 @@ public class UrlFactory {
         try {
             return new URL(NBP_URL + fileName);
         } catch (MalformedURLException e) {
-            e.printStackTrace();
-            return null;
+            throw new IncorrectUrlException(NBP_URL + fileName,e.getMessage());
         }
     }
 }
