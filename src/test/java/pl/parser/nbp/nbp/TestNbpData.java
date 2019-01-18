@@ -79,4 +79,20 @@ public class TestNbpData {
         int year = nbpData.getYear("aaaa");
     }
 
+    @Test
+    public void shouldGetFilesContentReturnFileList(){
+        //given
+        String startDate = previousYear + "-01-01";
+        String endDate = currentYear + "-01-01";
+        NbpData nbpData = new NbpData(startDate,endDate);
+        NbpDownloader nbpDownloader = Mockito.mock(NbpDownloader.class);
+        CurrencyDataSet currencyDataSet = Mockito.mock(CurrencyDataSet.class);
+        BDDMockito.given(nbpDownloader.getCurrencyFiles(ArgumentMatchers.any(CurrencyDataSet.class))).willReturn(true);
+        //when
+        boolean result = nbpData.getFilesContent(nbpDownloader, currencyDataSet);
+        //then
+        Assert.assertEquals(true,result);
+
+
+    }
 }
