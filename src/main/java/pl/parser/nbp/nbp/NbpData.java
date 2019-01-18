@@ -30,8 +30,13 @@ public class NbpData {
         return fileList;
     }
 
-    private int getYear(String startDate) {
-        return Integer.parseInt(startDate.substring(0, 4));
+    int getYear(String date) {
+        try {
+            int year = Integer.parseInt(date.substring(0, 4));
+            return year;
+        }catch (java.lang.NumberFormatException e){
+            throw new IncorrectYearParsingException(date);
+        }
     }
 
     String generateCatalogFileName(int year) {
@@ -48,9 +53,8 @@ public class NbpData {
     }
 
 
-    public void getFilesContent(CurrencyDataSet currencyDataSet) {
-        NbpDownloader nbpDownloader = new NbpDownloader();
-        nbpDownloader.getCurrencyFiles(currencyDataSet);
+    public boolean getFilesContent(NbpDownloader nbpDownloader, CurrencyDataSet currencyDataSet) {
+        return nbpDownloader.getCurrencyFiles(currencyDataSet);
     }
 
 }
