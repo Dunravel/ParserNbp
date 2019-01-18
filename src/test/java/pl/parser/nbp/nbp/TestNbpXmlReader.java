@@ -27,7 +27,7 @@ public class TestNbpXmlReader {
         QName name = startElement.getName();
         startElement.getName().getLocalPart();
         //when
-        boolean isCurrecy = nbpXmlReader.isCurrency(requestedCurrency, xmlEvent);
+        boolean isCurrecy = nbpXmlReader.isCurrency(xmlEvent);
         //then
         Assert.assertTrue(isCurrecy);
 
