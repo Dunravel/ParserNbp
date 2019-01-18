@@ -92,7 +92,7 @@ public class NbpXmlReader {
         return false;
     }
 
-    private String getValue(XMLEventReader eventReader) throws XMLStreamException {
+    String getValue(XMLEventReader eventReader) throws XMLStreamException {
         XMLEvent event;
         event = eventReader.nextEvent();
         return event.asCharacters().getData();
