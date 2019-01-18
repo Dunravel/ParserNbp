@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamException;
@@ -62,7 +61,7 @@ public class TestNbpXmlReader {
         String value = "test";
         XMLEventReader eventReader = Mockito.mock(XMLEventReader.class);
 
-        XMLEvent xmlEvent = getEventData(value);
+        XMLEvent xmlEvent = getDataEvent(value);
         BDDMockito.given(eventReader.hasNext()).willReturn(true);
         BDDMockito.given(eventReader.nextEvent()).willReturn(xmlEvent);
 
@@ -81,7 +80,7 @@ public class TestNbpXmlReader {
         String currencyCode = "kod_waluty";
         XMLEvent currencyEvent = getStartElement(currencyCode);
         String currencyValue = "EUR";
-        XMLEvent dataEvent = getEventData(currencyValue);
+        XMLEvent dataEvent = getDataEvent(currencyValue);
 
         BDDMockito.when(xmlEventReader.nextEvent()).thenReturn(currencyEvent,dataEvent);
 
@@ -100,7 +99,7 @@ public class TestNbpXmlReader {
         String currencyCode = "kod_waluty";
         XMLEvent currencyEvent = getStartElement(currencyCode);
         String currencyValue = "USD";
-        XMLEvent dataEvent = getEventData(currencyValue);
+        XMLEvent dataEvent = getDataEvent(currencyValue);
 
         BDDMockito.when(xmlEventReader.nextEvent()).thenReturn(currencyEvent,dataEvent);
 
@@ -151,7 +150,26 @@ public class TestNbpXmlReader {
         Assert.assertFalse(isSellRate);
     }
 
-    private XMLEvent getEventData(String returnedValue) {
+    @Test
+    public void shouldGetBuyRateReturnRateWhenBuyRateFound() throws XMLStreamException {
+        //given
+        XMLEventReader xmlEventReader = Mockito.mock(XMLEventReader.class);
+        BDDMockito.when(xmlEventReader.hasNext()).thenReturn(true,true,false);
+
+        XMLEvent buyEvent = getStartElement("kurs_kupna");
+        XMLEvent dataEvent = getDataEvent("1,0");
+
+        BDDMockito.when(xmlEventReader.nextEvent()).thenReturn(buyEvent,dataEvent);
+        //when
+        double buyRate = nbpXmlReader.getBuyRate(xmlEventReader);
+        //then
+        Assert.assertEquals(1.0,buyRate,0.1);
+    }
+
+
+
+
+    private XMLEvent getDataEvent(String returnedValue) {
         XMLEvent dataEvent = Mockito.mock(XMLEvent.class);
         Characters dataCharacters = Mockito.mock(Characters.class);
         BDDMockito.given(dataEvent.asCharacters()).willReturn(dataCharacters);
