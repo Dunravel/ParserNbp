@@ -18,21 +18,25 @@ import java.util.Set;
 
 public class TestNbpDownloader {
     private NbpDownloader nbpDownloader;
+    private NbpCatalogConnector nbpCatalogConnector;
+    private BufferedReader reader1;
+    private BufferedReader reader2;
 
     @Before
     public void setUp(){
         nbpDownloader = new NbpDownloader();
+        nbpCatalogConnector = Mockito.mock(NbpCatalogConnector.class);
+        reader1 = new BufferedReader(new StringReader("first\nsecond\nthird"));
+        reader2 = new BufferedReader(new StringReader("fourth\nfifth\nsixth"));
     }
 
     @Test
     public void shouldGetFileListReturnCompleteListForCatalog(){
         //given
-        NbpCatalogConnector nbpCatalogConnector = Mockito.mock(NbpCatalogConnector.class);
-        BufferedReader reader1 = new BufferedReader(new StringReader("first\nsecond\nthird"));
-        BufferedReader reader2 = new BufferedReader(new StringReader("fourth\nfifth\nsixth"));
-        //BDDMockito.given(nbpCatalogConnector.getConnection( ArgumentMatchers.any())).willReturn(reader1);
-        BDDMockito.when(nbpCatalogConnector.getConnection(ArgumentMatchers.any())).thenReturn(reader1,reader2);
+
+
         //when
+        BDDMockito.when(nbpCatalogConnector.getConnection(ArgumentMatchers.any())).thenReturn(reader1,reader2);
         Set<String> result = nbpDownloader.getFileList(nbpCatalogConnector,Sets.newSet("1","2"));
         //then
         Assert.assertEquals(6, result.size());
@@ -42,17 +46,13 @@ public class TestNbpDownloader {
     @Test
     public void shouldGetFileListFromCatalogReturnContentsOfSingleCatalog() throws MalformedURLException {
         //given
-        NbpCatalogConnector nbpCatalogConnector = Mockito.mock(NbpCatalogConnector.class);
-        BufferedReader reader = new BufferedReader(new StringReader("first\nsecond\nthird"));
         URL url = new URL("http://localhost/");
-        BDDMockito.given(nbpCatalogConnector.getConnection(ArgumentMatchers.any())).willReturn(reader);
+        BDDMockito.given(nbpCatalogConnector.getConnection(ArgumentMatchers.any())).willReturn(reader1);
         //when
         Set<String> result = nbpDownloader.getFileListFromCatalog(nbpCatalogConnector,url);
         //then
         Assert.assertEquals(3, result.size());
         Assert.assertEquals(Sets.newSet("first.xml","second.xml","third.xml"),result);
     }
-
-
 
 }
