@@ -12,6 +12,15 @@ public enum Currency {
         } catch (IllegalArgumentException ex){
             return false;
         }
-        return true;
+        return false;
+    }
+
+    public static String listAll(){
+        StringBuilder list = new StringBuilder();
+        for(Currency currency : values()){
+            list.append(" ");
+            list.append(currency.toString());
+        }
+        return list.toString();
     }
 }
