@@ -82,7 +82,7 @@ public class NbpXmlReader {
     private boolean findCurrency(String requestedCurrency, XMLEventReader eventReader) throws XMLStreamException {
         while(eventReader.hasNext()){
             XMLEvent event = eventReader.nextEvent();
-            if(isCurrency(requestedCurrency,event)){
+            if(isCurrency(event)){
                 String currency = getValue(eventReader);
                 if(currency.equals(requestedCurrency)){
                     return true;
@@ -98,7 +98,7 @@ public class NbpXmlReader {
         return event.asCharacters().getData();
     }
 
-    private boolean isCurrency(String requestedCurrency, XMLEvent event) {
+    boolean isCurrency(XMLEvent event) {
         if(event.isStartElement()) {
             StartElement currencyElement = event.asStartElement();
             return currencyElement.getName().getLocalPart().equals(CURRENCY_MARK);
