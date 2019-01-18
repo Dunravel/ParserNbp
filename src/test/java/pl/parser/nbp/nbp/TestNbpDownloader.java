@@ -7,7 +7,10 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.mockito.internal.util.collections.Sets;
+import pl.parser.nbp.domain.Currency;
 import pl.parser.nbp.domain.CurrencyData;
+import pl.parser.nbp.domain.CurrencyDataSet;
+import pl.parser.nbp.domain.CurrencyDataSetFactory;
 
 import java.io.BufferedReader;
 import java.io.StringReader;
@@ -63,6 +66,19 @@ public class TestNbpDownloader {
         //when
         boolean result = nbpDownloader.getCurrencyFileContent(nbpXmlReader,currencyData);
         //then
+        Assert.assertTrue(result);
+    }
+
+    @Test
+    public void shouldGetCurrencyFilesReturnTrueForCorrectData(){
+        //given
+        CurrencyDataSetFactory currencyDataSetFactory = new CurrencyDataSetFactory();
+        CurrencyDataSet currencyDataSet = currencyDataSetFactory.create(Currency.EUR,Sets.newSet("first.xml","second.cml"));
+        NbpXmlReader nbpXmlReader = Mockito.mock(NbpXmlReader.class);
+        BDDMockito.given(nbpXmlReader.getBuySellRate(ArgumentMatchers.any(),ArgumentMatchers.any())).willReturn(true);
+        //when
+        boolean result = nbpDownloader.getCurrencyFiles(nbpXmlReader, currencyDataSet);
+        //
         Assert.assertTrue(result);
     }
 
