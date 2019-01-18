@@ -20,19 +20,24 @@ public class TestNbpData {
 
     private int currentYear;
     private int previousYear;
+    private String startDate;
+    private String endDate;
+    private NbpData nbpData;
+    private NbpDownloader nbpDownloader;
 
     @Before
     public void setUp() {
         currentYear = LocalDate.now().getYear();
         previousYear = currentYear - 1;
+        startDate = previousYear + "-01-01";
+        endDate = currentYear + "-01-01";
+        nbpData = new NbpData(startDate,endDate);
+        nbpDownloader = Mockito.mock(NbpDownloader.class);
     }
 
     @Test
     public void shouldCreateCatalogListReturnCorrectListOfFilenamesForPreviousYear() {
         //given
-        String startDate = previousYear + "-01-01";
-        String endDate = currentYear + "-01-01";
-        NbpData nbpData = new NbpData(startDate,endDate);
         //when
         Set<String> fileLists = nbpData.createCatalogList();
         //then
@@ -43,10 +48,6 @@ public class TestNbpData {
     @Test
     public void shouldCreateFileListReturnFileList(){
         //given
-        String startDate = previousYear + "-01-01";
-        String endDate = currentYear + "-01-01";
-        NbpData nbpData = new NbpData(startDate,endDate);
-        NbpDownloader nbpDownloader = Mockito.mock(NbpDownloader.class);
         BDDMockito.given(nbpDownloader.getFileList(ArgumentMatchers.anySet())).willReturn(Sets.newSet("file.xml"));
         //when
         Set<String> result = nbpData.createFileList(nbpDownloader);
@@ -57,9 +58,6 @@ public class TestNbpData {
     @Test
     public void shouldGetYearReturnCorrectYear(){
         //given
-        String startDate = previousYear + "-01-01";
-        String endDate = currentYear + "-01-01";
-        NbpData nbpData = new NbpData(startDate,endDate);
         //when
         int startYear = nbpData.getYear(startDate);
         int endYear = nbpData.getYear(endDate);
@@ -71,28 +69,20 @@ public class TestNbpData {
     @Test(expected = IncorrectYearParsingException.class)
     public void shouldGetYearReturnExceptionWhenNotANumberEntered(){
         //given
-        String startDate = previousYear + "-01-01";
-        String endDate = currentYear + "-01-01";
-
-        NbpData nbpData = new NbpData(startDate,endDate);
         //when
-        int year = nbpData.getYear("aaaa");
+        nbpData.getYear("aaaa");
+        //then
     }
 
     @Test
     public void shouldGetFilesContentReturnFileList(){
         //given
-        String startDate = previousYear + "-01-01";
-        String endDate = currentYear + "-01-01";
-        NbpData nbpData = new NbpData(startDate,endDate);
-        NbpDownloader nbpDownloader = Mockito.mock(NbpDownloader.class);
         CurrencyDataSet currencyDataSet = Mockito.mock(CurrencyDataSet.class);
         BDDMockito.given(nbpDownloader.getCurrencyFiles(ArgumentMatchers.any(CurrencyDataSet.class))).willReturn(true);
         //when
         boolean result = nbpData.getFilesContent(nbpDownloader, currencyDataSet);
         //then
-        Assert.assertEquals(true,result);
-
-
+        Assert.assertTrue(result);
     }
+
 }
