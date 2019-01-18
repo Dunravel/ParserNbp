@@ -7,6 +7,9 @@ import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 
 import javax.xml.namespace.QName;
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
@@ -50,6 +53,22 @@ public class TestNbpXmlReader {
         boolean isCurrency = nbpXmlReader.isCurrency(xmlEvent);
         //then
         Assert.assertFalse(isCurrency);
+    }
+
+    @Test
+    public void shouldGetValueReturnString() throws XMLStreamException {
+        //given
+        XMLEventReader eventReader = Mockito.mock(XMLEventReader.class);
+        BDDMockito.given(eventReader.hasNext()).willReturn(true);
+        XMLEvent event = Mockito.mock(XMLEvent.class);
+        BDDMockito.given(eventReader.nextEvent()).willReturn(event);
+        Characters characters = Mockito.mock(Characters.class);
+        BDDMockito.given(event.asCharacters()).willReturn(characters);
+        BDDMockito.given(characters.getData()).willReturn("test");
+        //when
+        String result = nbpXmlReader.getValue(eventReader);
+        //then
+        Assert.assertEquals("test",result);
     }
 
     private void xmlEventIsStartElementAndHasName(String matcher) {
