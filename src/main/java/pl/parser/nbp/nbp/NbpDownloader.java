@@ -14,10 +14,11 @@ public class NbpDownloader {
 
     private static final String FILE_NAME_FOOTER = ".xml";
 
-    void getCurrencyFiles(CurrencyDataSet currencyDataSet) {
+    boolean getCurrencyFiles(CurrencyDataSet currencyDataSet) {
         for(CurrencyData currencyData : currencyDataSet.getSet()){
             getCurrencyFileContent(new NbpCurrencyFileConnector(), currencyData);
         }
+        return true;
     }
 
     void getCurrencyFileContent(NbpConnector nbpConnector, CurrencyData currencyData) {

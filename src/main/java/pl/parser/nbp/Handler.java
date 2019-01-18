@@ -12,12 +12,13 @@ class Handler {
         InputData inputData = getInputData(args);
 
         NbpData nbpData = new NbpData(inputData.getStartDate(),inputData.getEndDate());
-        FileList fileList = new FileList(nbpData.createFileList(new NbpDownloader()));
+        NbpDownloader nbpDownloader = new NbpDownloader();
+        FileList fileList = new FileList(nbpData.createFileList(nbpDownloader));
 
         filterFileList(inputData, fileList);
 
         CurrencyDataSet currencyDataSet = getCurrencyDataSet(inputData, fileList);
-        nbpData.getFilesContent(currencyDataSet);
+        nbpData.getFilesContent(nbpDownloader,currencyDataSet);
 
         displayResults(currencyDataSet);
     }
