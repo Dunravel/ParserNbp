@@ -16,7 +16,7 @@ public class TestCurrency {
     }
 
     @Test
-    public void shouldRxistReturnFalseWhenNotRecognizedCurrency(){
+    public void shouldExistReturnFalseWhenNotRecognizedCurrency(){
         //given
         String currencyName = "AAA";
         //when
