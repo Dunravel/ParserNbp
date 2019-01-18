@@ -2,7 +2,6 @@ package pl.parser.nbp.nbp;
 
 import org.junit.Assert;
 import org.junit.Test;
-import pl.parser.nbp.CurrencyFileNotFoundException;
 
 import java.io.InputStream;
 

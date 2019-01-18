@@ -1,7 +1,5 @@
 package pl.parser.nbp.nbp;
 
-import pl.parser.nbp.NoFileFoundException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

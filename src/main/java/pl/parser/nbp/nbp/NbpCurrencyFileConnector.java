@@ -1,7 +1,5 @@
 package pl.parser.nbp.nbp;
 
-import pl.parser.nbp.CurrencyFileNotFoundException;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;

@@ -1,6 +1,5 @@
 package pl.parser.nbp.validate;
 
-import pl.parser.nbp.UnrecognizedCurrency;
 import pl.parser.nbp.domain.Currency;
 
 import java.text.ParseException;

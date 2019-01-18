@@ -1,6 +1,5 @@
 package pl.parser.nbp.nbp;
 
-import pl.parser.nbp.NoFileFoundException;
 import pl.parser.nbp.domain.CurrencyData;
 
 import java.io.BufferedReader;

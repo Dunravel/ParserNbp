@@ -3,7 +3,6 @@ package pl.parser.nbp.validate;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import pl.parser.nbp.UnrecognizedCurrency;
 
 public class TestInputCheck {
 

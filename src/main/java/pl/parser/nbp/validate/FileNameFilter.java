@@ -1,6 +1,6 @@
 package pl.parser.nbp.validate;
 
-import pl.parser.nbp.NoFileFoundException;
+import pl.parser.nbp.nbp.NoFileFoundException;
 
 import java.util.HashSet;
 import java.util.Set;

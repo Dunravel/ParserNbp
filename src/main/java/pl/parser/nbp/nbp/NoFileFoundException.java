@@ -1,4 +1,4 @@
-package pl.parser.nbp;
+package pl.parser.nbp.nbp;
 
 public class NoFileFoundException extends RuntimeException{
 

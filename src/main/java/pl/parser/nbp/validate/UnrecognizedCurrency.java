@@ -1,4 +1,4 @@
-package pl.parser.nbp;
+package pl.parser.nbp.validate;
 
 public class UnrecognizedCurrency extends RuntimeException {
 
