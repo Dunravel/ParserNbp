@@ -14,4 +14,14 @@ public class TestCurrency {
         //then
         Assert.assertTrue(result);
     }
+
+    @Test
+    public void shouldRxistReturnFalseWhenNotRecognizedCurrency(){
+        //given
+        String currencyName = "AAA";
+        //when
+        boolean result = Currency.exists(currencyName);
+        //then
+        Assert.assertFalse(result);
+    }
 }

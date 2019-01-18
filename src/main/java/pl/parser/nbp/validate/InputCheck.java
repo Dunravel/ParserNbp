@@ -26,7 +26,7 @@ public class InputCheck {
 
     boolean verifyCurrency(String currency) {
         if(!Currency.exists(currency))
-            throw new UnrecognizedCurrency();
+            throw new UnrecognizedCurrencyException();
         return true;
     }
 
