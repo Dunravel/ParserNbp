@@ -1,6 +1,7 @@
 package pl.parser.nbp.nbp;
 
 import pl.parser.nbp.domain.CurrencyData;
+import pl.parser.nbp.domain.CurrencyDataSet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,17 +10,17 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
-public class NbpDownloader {
+class NbpDownloader {
 
     private static final String FILE_NAME_FOOTER = ".xml";
 
-    public void getCurrencyFiles(Set<CurrencyData> currencyDataSet) {
-        for(CurrencyData currencyData : currencyDataSet){
+    void getCurrencyFiles(CurrencyDataSet currencyDataSet) {
+        for(CurrencyData currencyData : currencyDataSet.getSet()){
             getCurrencyFileContent(new NbpCurrencyFileConnector(), currencyData);
         }
     }
 
-    public void getCurrencyFileContent(NbpConnector nbpConnector, CurrencyData currencyData) {
+    void getCurrencyFileContent(NbpConnector nbpConnector, CurrencyData currencyData) {
         UrlFactory urlFactory = new UrlFactory();
         InputStream in = (InputStream) nbpConnector.getConnection(urlFactory.create(currencyData.getFileName()));
         NbpXmlReader nbpXmlReader = new NbpXmlReader(in);
@@ -27,7 +28,7 @@ public class NbpDownloader {
         nbpConnector.closeConnection();
     }
 
-    public Set<String> getFileList(Set<String> catalogList) {
+    Set<String> getFileList(Set<String> catalogList) {
         Set<String> fileList = new HashSet<>();
         UrlFactory urlFactory = new UrlFactory();
         for (String catalogName : catalogList) {
@@ -36,7 +37,7 @@ public class NbpDownloader {
         return fileList;
     }
 
-    public Set<String> getFileListFromCatalog(NbpConnector nbpConnector,URL url) {
+    Set<String> getFileListFromCatalog(NbpConnector nbpConnector,URL url) {
         Set<String> files = new HashSet<>() ;
         BufferedReader reader = (BufferedReader)nbpConnector.getConnection(url);
 
@@ -51,6 +52,4 @@ public class NbpDownloader {
         nbpConnector.closeConnection();
         return files;
     }
-
-
 }

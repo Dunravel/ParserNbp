@@ -41,6 +41,7 @@ public class TestNbpData {
         //given
         String startDate = previousYear + "-01-01";
         String endDate = currentYear + "-01-01";
+
         NbpData nbpData = new NbpData(startDate,endDate);
         //when
         Set<String> fileLists = nbpData.createCatalogList();

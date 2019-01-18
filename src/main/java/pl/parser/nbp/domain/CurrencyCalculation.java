@@ -1,31 +1,29 @@
 package pl.parser.nbp.domain;
 
-import java.util.Set;
-
 public class CurrencyCalculation {
-    private Set<CurrencyData> currencyDataSet;
+    private CurrencyDataSet currencyDataSet;
 
-    public CurrencyCalculation(Set<CurrencyData> currencyDataSet) {
+    public CurrencyCalculation(CurrencyDataSet currencyDataSet) {
         this.currencyDataSet = currencyDataSet;
     }
 
     public double getAverageBuyRate() {
-        return currencyDataSet.stream()
+        return currencyDataSet.getSet().stream()
                 .mapToDouble(CurrencyData::getBuyRate)
                 .average()
                 .getAsDouble();
     }
 
     public double getDeviationSellRate() {
-        double sellRateAverage = currencyDataSet.stream()
+        double sellRateAverage = currencyDataSet.getSet().stream()
                 .mapToDouble(CurrencyData::getSellRate)
                 .average()
                 .getAsDouble();
 
-        double sellRateVariant = currencyDataSet.stream()
+        double sellRateVariant = currencyDataSet.getSet().stream()
                 .mapToDouble(CurrencyData::getSellRate)
                 .map(e -> Math.pow((e-sellRateAverage),2))
-                .sum() / currencyDataSet.size();
+                .sum() / currencyDataSet.getSet().size();
 
         return Math.sqrt(sellRateVariant);
     }

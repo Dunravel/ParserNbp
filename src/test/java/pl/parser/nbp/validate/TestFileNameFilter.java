@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.internal.util.collections.Sets;
+import pl.parser.nbp.domain.FileList;
 import pl.parser.nbp.nbp.NoFileFoundException;
 
 public class TestFileNameFilter {
@@ -17,40 +18,42 @@ public class TestFileNameFilter {
 
     @Before
     public void setUp(){
-        fileNameFilter = new FileNameFilter(CURRENCY_TABLE_TYPE,START_DATE,START_DATE);
+        fileNameFilter = new FileNameFilter(START_DATE,START_DATE);
     }
     @Test
-    public void shouldGetCorrectFileNameReturnFileName(){
+    public void shouldIsNotCorrectFileNameReturnFalseForCorrectName(){
         //given
         //when
-        String name = fileNameFilter.getCorrectFileName(CORRECT_FILE_NAME);
+        boolean result = fileNameFilter.isNotCorrectFileName(CORRECT_FILE_NAME);
         //then
-        Assert.assertEquals("c252z181231.xml",name);
+        Assert.assertFalse(result);
     }
 
     @Test
-    public void shouldGetCorrectFileNameReturnNullWhenFileWithNotCorrectTable(){
+    public void shouldIsNotCorrectFileNameReturnTrueWhenFileWithNotCorrectTable(){
         //given
         //when
-        String name = fileNameFilter.getCorrectFileName(INCORRECT_TABLE_FILE);
+        boolean result = fileNameFilter.isNotCorrectFileName(INCORRECT_TABLE_FILE);
         //then
-        Assert.assertNull(name);
+        Assert.assertTrue(result);
     }
 
     @Test
-    public void shouldGetCorrectFileNameReturnNullWhenFileOutOfTimePeriod(){
+    public void shouldIsNotCorrectFileNameReturnTrueWhenFileOutOfTimePeriod(){
         //given
         //when
-        String name = fileNameFilter.getCorrectFileName(INCORRECT_DATE_FILE);
+        boolean result= fileNameFilter.isNotCorrectFileName(INCORRECT_DATE_FILE);
         //then
-        Assert.assertNull(name);
+        Assert.assertTrue(result);
     }
 
-    @Test(expected = NoFileFoundException.class)
-    public void shouldFilterReturnErrorWhenNoCorrectFilesFound(){
+    @Test
+    public void shouldFilterRemoveAllEntriesWhenNoCorrectFile(){
         //given
+        FileList fileList = new FileList(Sets.newSet("1234.xml"));
         //when
-        fileNameFilter.filter(Sets.newSet("1234.xml"));
+        fileNameFilter.filter(fileList);
         //then
+        Assert.assertEquals(Sets.newSet(),fileList.getFileList());
     }
 }

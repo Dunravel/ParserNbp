@@ -17,9 +17,4 @@ public class TestNbpCatalogConnector {
         //then
         Assert.assertNull(bufferedReader);
     }
-
-
-
-
-
 }

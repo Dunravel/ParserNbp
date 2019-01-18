@@ -1,6 +1,6 @@
 package pl.parser.nbp.nbp;
 
-import pl.parser.nbp.domain.CurrencyData;
+import pl.parser.nbp.domain.CurrencyDataSet;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -19,7 +19,7 @@ public class NbpData {
         this.endDate = endDate;
     }
 
-    public Set<String> createCatalogList() {
+    Set<String> createCatalogList() {
         int startYear = Integer.parseInt(startDate.substring(0,4));
         int endYear = Integer.parseInt(endDate.substring(0,4));
         Set<String> fileList = new HashSet<>();
@@ -31,7 +31,7 @@ public class NbpData {
         return fileList;
     }
 
-    private String generateCatalogFileName(int year) {
+    String generateCatalogFileName(int year) {
         if(year != LocalDate.now().getYear()) {
             return (CATALOG_NAME_HEADER + year + CATALOG_NAME_FOOTER);
         }else{
@@ -42,13 +42,12 @@ public class NbpData {
 
     public Set<String> createFileList() {
         Set<String> catalogList = createCatalogList();
-
         NbpDownloader nbpDownloader = new NbpDownloader();
         return nbpDownloader.getFileList(catalogList);
     }
 
 
-    public void getFilesContent(Set<CurrencyData> currencyDataSet) {
+    public void getFilesContent(CurrencyDataSet currencyDataSet) {
         NbpDownloader nbpDownloader = new NbpDownloader();
         nbpDownloader.getCurrencyFiles(currencyDataSet);
 

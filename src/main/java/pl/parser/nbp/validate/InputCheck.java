@@ -12,7 +12,8 @@ public class InputCheck {
     private static final String MINIMUM_DATE = "2002-01-01";
 
 
-    public void verify(String[] args) {
+
+    public boolean verify(String[] args) {
         try {
             verifyAmount(args);
             verifyCurrency(args[0]);
@@ -21,6 +22,7 @@ public class InputCheck {
             System.out.println(e.getMessage());
             System.exit(-1);
         }
+        return true;
     }
 
     boolean verifyAmount(String[] args) throws IncorrectAmountOfParametersException {

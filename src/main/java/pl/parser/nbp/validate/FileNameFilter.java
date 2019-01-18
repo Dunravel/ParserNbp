@@ -1,42 +1,56 @@
 package pl.parser.nbp.validate;
 
-import pl.parser.nbp.nbp.NoFileFoundException;
+import pl.parser.nbp.domain.FileList;
+import pl.parser.nbp.domain.InputData;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class FileNameFilter {
-    private String tableType;
-    private String startDate;
-    private String endDate;
+    private static final String CURRENCY_TABLE_TYPE = "c";
+    private final String startDate;
+    private final String endDate;
 
-    public FileNameFilter(String tableType, String startDate, String endDate){
-        this.tableType = tableType;
-        this.startDate = startDate.substring(2,4) + startDate.substring(5,7) + startDate.substring(8,10);
-        this.endDate = endDate.substring(2,4) + endDate.substring(5,7) + endDate.substring(8,10);
+    public FileNameFilter(String startDate, String endDate){
+        this.startDate = convertDate(startDate);
+        this.endDate = convertDate(endDate);
     }
 
-    public Set<String> filter(Set<String> fileList) {
-        Set<String> filteredFileList = new HashSet<>();
-        for (String fileNameRaw : fileList) {
-            String name = getCorrectFileName(fileNameRaw);
-            if(name != null) {
-                filteredFileList.add(name);
+    public FileNameFilter(InputData inputData) {
+        this.startDate = convertDate(inputData.getStartDate());
+        this.endDate = convertDate(inputData.getEndDate());
+    }
+
+    private String convertDate(String date) {
+        return date.substring(2, 4) + date.substring(5, 7) + date.substring(8, 10);
+    }
+
+    public void filter(FileList fileList) {
+        Set<String> fileSet = fileList.getFileList();
+        fileSet.forEach(this::removeIncorrectCharacters);
+        fileSet.removeIf(this::isNotCorrectFileName);
+    }
+
+    String removeIncorrectCharacters(String input) {
+        if(input.startsWith("\uFEFF")) {
+            input = input
+                    .trim()
+                    .replace("\uFEFF", "");
+        }
+        return input;
+    }
+
+    boolean isNotCorrectFileName(String fileName) {
+        if (fileName.startsWith(CURRENCY_TABLE_TYPE)) {
+            String datePart = getDatePart(fileName);
+            if (datePart.compareTo(startDate) >= 0 && datePart.compareTo(endDate) <= 0) {
+                return false;
             }
         }
-        if(filteredFileList.size()  == 0){
-            throw new NoFileFoundException();
-        }
-        return filteredFileList;
+        return true;
     }
 
-    public String getCorrectFileName(String input) {
-        input = input.replace("\uFEFF", "");
-        if (input.startsWith(tableType)) {
-            if (input.substring(5, 11).compareTo(startDate) >= 0 && input.substring(5, 11).compareTo(endDate) <= 0) {
-                return input;
-            }
-        }
-        return null;
+    private String getDatePart(String fileName) {
+        return fileName.substring(5, 11);
     }
+
 }

@@ -31,16 +31,11 @@ public class TestInputCheck {
     }
 
     @Test
-    public void shouldReturnTrueWhenAmountOfParametersIsThree(){
+    public void shouldReturnTrueWhenAmountOfParametersIsThree() throws IncorrectAmountOfParametersException {
         //given
         String args[] = {"1","2","3"};
         //when
-        boolean isThree = false;
-        try {
-            isThree = inputCheck.verifyAmount(args);
-        } catch (IncorrectAmountOfParametersException e) {
-            e.printStackTrace();
-        }
+        boolean isThree = inputCheck.verifyAmount(args);
         //then
         Assert.assertTrue(isThree);
     }
