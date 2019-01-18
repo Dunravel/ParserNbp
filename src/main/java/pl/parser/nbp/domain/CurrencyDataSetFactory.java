@@ -6,6 +6,9 @@ import java.util.Set;
 public class CurrencyDataSetFactory {
 
     public CurrencyDataSet create(Currency currency, Set<String> fileList) {
+        if(fileList.isEmpty()){
+            throw new FileListEmptyException();
+        }
         Set<CurrencyData> currencyDataSet = new HashSet<>();
         for(String file : fileList){
             currencyDataSet.add(new CurrencyData(currency,file));

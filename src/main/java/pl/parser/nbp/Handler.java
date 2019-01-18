@@ -31,7 +31,7 @@ class Handler {
 
     CurrencyDataSet getCurrencyDataSet(InputData inputData, FileList fileList) {
         CurrencyDataSetFactory currencyDataSetFactory = new CurrencyDataSetFactory();
-        return currencyDataSetFactory.create(inputData.getCurrency(),fileList);
+        return currencyDataSetFactory.create(inputData.getCurrency(),fileList.getFileList());
     }
 
     void filterFileList(InputData inputData, FileList fileList) {

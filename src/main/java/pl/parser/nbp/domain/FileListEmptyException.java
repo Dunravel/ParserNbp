@@ -1,4 +1,4 @@
 package pl.parser.nbp.domain;
 
-public class FileListEmptyException extends Exception{
+public class FileListEmptyException extends RuntimeException{
 }

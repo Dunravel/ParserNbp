@@ -1,8 +1,7 @@
-package pl.parser.nbp.validate;
+package pl.parser.nbp.domain;
 
 import org.junit.Assert;
 import org.junit.Test;
-import pl.parser.nbp.domain.Currency;
 
 public class TestCurrency {
     @Test

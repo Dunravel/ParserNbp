@@ -9,7 +9,7 @@ import java.util.Set;
 public class TestCurrencyDataSetFactory {
 
     @Test
-    public void shouldCreateMethodCreateListOfCurrencyData(){
+    public void shouldCreateMethodCreateListOfCurrencyData() {
         //given
         CurrencyDataSetFactory currencyDataSetFactory = new CurrencyDataSetFactory();
         Set<String> fileList = Sets.newSet("first.txt");
@@ -20,12 +20,12 @@ public class TestCurrencyDataSetFactory {
     }
 
     @Test(expected = FileListEmptyException.class)
-    public void shouldCreateReturnErrorWhenFileListEmpty(){
+    public void shouldCreateReturnErrorWhenFileListEmpty() {
         //given
         CurrencyDataSetFactory currencyDataSetFactory = new CurrencyDataSetFactory();
         Set<String> fileList = Sets.newSet();
         //when
-        CurrencyDataSet currencyDataSet = currencyDataSetFactory.create(Currency.EUR,fileList);
+        currencyDataSetFactory.create(Currency.EUR,fileList);
         //then
     }
 }
