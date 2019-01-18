@@ -18,4 +18,14 @@ public class TestCurrencyDataSetFactory {
         //then
         Assert.assertEquals(1,currencyDataSet.getSet().size());
     }
+
+    @Test(expected = FileListEmptyException.class)
+    public void shouldCreateReturnErrorWhenFileListEmpty(){
+        //given
+        CurrencyDataSetFactory currencyDataSetFactory = new CurrencyDataSetFactory();
+        Set<String> fileList = Sets.newSet();
+        //when
+        CurrencyDataSet currencyDataSet = currencyDataSetFactory.create(Currency.EUR,fileList);
+        //then
+    }
 }
