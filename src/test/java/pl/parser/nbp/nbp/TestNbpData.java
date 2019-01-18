@@ -36,7 +36,7 @@ public class TestNbpData {
     }
 
     @Test
-    public void shouldCreateCatalogListReturnCorrectListOfFilenamesForPreviousYear() {
+    public void shouldCreateCatalogListReturnCorrectListOfFilenamesForPreviousAndCurrentYear() {
         //given
         //when
         Set<String> fileLists = nbpData.createCatalogList();
@@ -84,5 +84,4 @@ public class TestNbpData {
         //then
         Assert.assertTrue(result);
     }
-
 }
