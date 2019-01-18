@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
+
 public class TestInputCheck {
 
     private static final String CORRECT_CURRENCY = "EUR";
@@ -24,7 +26,7 @@ public class TestInputCheck {
     @Test(expected = IncorrectAmountOfParametersException.class)
     public void shouldReturnErrorWhenIncorrectAmountOfParameters() throws IncorrectAmountOfParametersException {
         //given
-        String args[] = {"1","2"};
+        String args[] = {"1", "2"};
         //when
         inputCheck.verifyAmount(args);
         //then
@@ -33,7 +35,7 @@ public class TestInputCheck {
     @Test
     public void shouldReturnTrueWhenAmountOfParametersIsThree() throws IncorrectAmountOfParametersException {
         //given
-        String args[] = {"1","2","3"};
+        String args[] = {"1", "2", "3"};
         //when
         boolean isThree = inputCheck.verifyAmount(args);
         //then
@@ -84,7 +86,7 @@ public class TestInputCheck {
     public void shouldAreDatesCorrectReturnErrorWhenDatePeriodIsNotCorrect() throws IncorrectDateException, IncorrectDatePeriodException {
         //given
         //when
-        inputCheck.areDatesCorrect(SECOND_CORRECT_DATE,FIRST_CORRECT_DATE);
+        inputCheck.areDatesCorrect(SECOND_CORRECT_DATE, FIRST_CORRECT_DATE);
         //then
     }
 
@@ -92,7 +94,27 @@ public class TestInputCheck {
     public void shouldAreDatesCorrectReturnErrorWhenYearIsBefore2002() throws IncorrectDateException, IncorrectDatePeriodException {
         //given
         //when
-        inputCheck.areDatesCorrect(OUT_OF_RANGE_DATE,SECOND_CORRECT_DATE);
+        inputCheck.areDatesCorrect(OUT_OF_RANGE_DATE, SECOND_CORRECT_DATE);
+        //then
+    }
+
+    @Test
+    public void shouldIsDateNotInFutureReturnTrueWhenDateIsInPast() throws DateInFutureException {
+        //given
+        String date = "2019-01-10";
+        //when
+        boolean dateNotInFuture = inputCheck.isDateNotInFuture(date);
+        //then
+        Assert.assertTrue(dateNotInFuture);
+    }
+
+    @Test(expected = DateInFutureException.class)
+    public void shouldIsDateNotInFutureReturnExceptionWhenDateInFuture() throws DateInFutureException {
+        //given
+        int currentYear = LocalDate.now().getYear();
+        String date = (currentYear + 1) + "-01-01";
+        //when
+        inputCheck.isDateNotInFuture(date);
         //then
     }
 }
