@@ -5,7 +5,6 @@ import pl.parser.nbp.domain.CurrencyDataSet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +15,9 @@ public class NbpDownloader {
 
     boolean getCurrencyFiles(NbpXmlReader nbpXmlReader,CurrencyDataSet currencyDataSet) {
         for(CurrencyData currencyData : currencyDataSet.getSet()){
-            getCurrencyFileContent(nbpXmlReader, currencyData);
+            if(!getCurrencyFileContent(nbpXmlReader, currencyData)){
+                throw new FileNotDownloadedException();
+            }
         }
         return true;
     }
