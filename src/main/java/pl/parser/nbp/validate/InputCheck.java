@@ -4,6 +4,8 @@ import pl.parser.nbp.domain.Currency;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class InputCheck {
@@ -18,7 +20,8 @@ public class InputCheck {
             verifyAmount(args);
             verifyCurrency(args[0]);
             areDatesCorrect(args[1],args[2]);
-        }catch (IncorrectAmountOfParametersException | IncorrectDatePeriodException | IncorrectDateException | UnrecognizedCurrencyException e){
+            isDateInFuture(args[2]);
+        }catch (IncorrectAmountOfParametersException | IncorrectDatePeriodException | IncorrectDateException | UnrecognizedCurrencyException | DateInFutureException e){
             System.out.println(e.getMessage());
             System.exit(-1);
         }
@@ -53,6 +56,14 @@ public class InputCheck {
             }
         } catch (ParseException e) {
             throw new IncorrectDateException();
+        }
+        return true;
+    }
+
+    boolean isDateInFuture(String endDate) throws DateInFutureException {
+        LocalDate date = LocalDate.parse(endDate);
+        if(date.isAfter(LocalDate.now())){
+            throw new DateInFutureException();
         }
         return true;
     }
