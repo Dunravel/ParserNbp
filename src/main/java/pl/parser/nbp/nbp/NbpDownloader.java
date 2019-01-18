@@ -16,7 +16,7 @@ public class NbpDownloader {
     boolean getCurrencyFiles(NbpXmlReader nbpXmlReader,CurrencyDataSet currencyDataSet) {
         for(CurrencyData currencyData : currencyDataSet.getSet()){
             if(!getCurrencyFileContent(nbpXmlReader, currencyData)){
-                throw new FileNotDownloadedException();
+                throw new FileNotDownloadedException(currencyData.getFileName());
             }
         }
         return true;

@@ -1,4 +1,7 @@
 package pl.parser.nbp.nbp;
 
-public class FileNotDownloadedException extends RuntimeException{
+class FileNotDownloadedException extends RuntimeException {
+    FileNotDownloadedException(String fileName) {
+        super("File not downloaded: " + fileName);
+    }
 }
