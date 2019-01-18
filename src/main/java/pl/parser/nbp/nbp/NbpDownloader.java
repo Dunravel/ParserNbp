@@ -14,19 +14,15 @@ public class NbpDownloader {
 
     private static final String FILE_NAME_FOOTER = ".xml";
 
-    boolean getCurrencyFiles(NbpConnector nbpConnector,CurrencyDataSet currencyDataSet) {
+    boolean getCurrencyFiles(NbpXmlReader nbpXmlReader,CurrencyDataSet currencyDataSet) {
         for(CurrencyData currencyData : currencyDataSet.getSet()){
-            getCurrencyFileContent(nbpConnector, currencyData);
+            getCurrencyFileContent(nbpXmlReader, currencyData);
         }
         return true;
     }
 
-    void getCurrencyFileContent(NbpConnector nbpConnector, CurrencyData currencyData) {
-        UrlFactory urlFactory = new UrlFactory();
-        InputStream in = (InputStream) nbpConnector.getConnection(urlFactory.create(currencyData.getFileName()));
-        NbpXmlReader nbpXmlReader = new NbpXmlReader(in);
-        nbpXmlReader.getBuySellRate(currencyData);
-        nbpConnector.closeConnection();
+    boolean getCurrencyFileContent(NbpXmlReader nbpXmlReader , CurrencyData currencyData) {
+        return nbpXmlReader.getBuySellRate(new NbpCurrencyFileConnector(), currencyData);
     }
 
     Set<String> getFileList(NbpCatalogConnector nbpConnector,Set<String> catalogList) {

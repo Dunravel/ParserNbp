@@ -13,15 +13,13 @@ public class NbpXmlReader {
     private static final String CURRENCY_MARK = "kod_waluty";
     private static final String CURRENCY_SELL_RATE = "kurs_sprzedazy";
     private static final String CURRENCY_BUY_RATE = "kurs_kupna";
-    private InputStream in;
 
-    public NbpXmlReader(InputStream in) {
-        this.in = in;
-    }
 
-    public void getBuySellRate(CurrencyData currencyData) {
+    public boolean getBuySellRate(NbpCurrencyFileConnector nbpCurrencyFileConnector, CurrencyData currencyData) {
         double buyRate = 0;
         double sellRate = 0;
+        UrlFactory urlFactory = new UrlFactory();
+        InputStream in = nbpCurrencyFileConnector.getConnection(urlFactory.create(currencyData.getFileName()));
 
         try {
             XMLInputFactory inputFactory = XMLInputFactory.newInstance();
@@ -38,6 +36,7 @@ public class NbpXmlReader {
         }
         currencyData.setBuyRate(buyRate);
         currencyData.setSellRate(sellRate);
+        return true;
     }
 
     private double getSellRate(XMLEventReader eventReader) throws XMLStreamException {
