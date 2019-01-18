@@ -10,7 +10,7 @@ public enum Currency {
         try {
             valueOf(currency);
         } catch (IllegalArgumentException ex){
-            return true;
+            return false;
         }
         return true;
     }
