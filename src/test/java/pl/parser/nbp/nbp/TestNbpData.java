@@ -48,7 +48,7 @@ public class TestNbpData {
     @Test
     public void shouldCreateFileListReturnFileList(){
         //given
-        BDDMockito.given(nbpDownloader.getFileList(ArgumentMatchers.anySet())).willReturn(Sets.newSet("file.xml"));
+        BDDMockito.given(nbpDownloader.getFileList(ArgumentMatchers.any(NbpCatalogConnector.class),ArgumentMatchers.anySet())).willReturn(Sets.newSet("file.xml"));
         //when
         Set<String> result = nbpData.createFileList(nbpDownloader);
         //then

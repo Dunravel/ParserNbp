@@ -49,7 +49,7 @@ public class NbpData {
 
     public Set<String>  createFileList(NbpDownloader nbpDownloader) {
         Set<String> catalogList = createCatalogList();
-        return nbpDownloader.getFileList(catalogList);
+        return nbpDownloader.getFileList(new NbpCatalogConnector(),catalogList);
     }
 
 

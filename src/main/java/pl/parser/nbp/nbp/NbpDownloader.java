@@ -29,11 +29,11 @@ public class NbpDownloader {
         nbpConnector.closeConnection();
     }
 
-    Set<String> getFileList(Set<String> catalogList) {
+    Set<String> getFileList(NbpCatalogConnector nbpConnector,Set<String> catalogList) {
         Set<String> fileList = new HashSet<>();
         UrlFactory urlFactory = new UrlFactory();
         for (String catalogName : catalogList) {
-            fileList.addAll(getFileListFromCatalog(new NbpCatalogConnector(),urlFactory.create(catalogName)));
+            fileList.addAll(getFileListFromCatalog(nbpConnector,urlFactory.create(catalogName)));
         }
         return fileList;
     }
